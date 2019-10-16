@@ -1,6 +1,6 @@
 ---
+title: "House hunting with data"
 layout: single
-title: House hunting with data
 comments: true
 classes: wide
 ---

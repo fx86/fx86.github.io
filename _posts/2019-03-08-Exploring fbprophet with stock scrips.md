@@ -1,3 +1,9 @@
+---
+title: "Exploring fbprophet with stock scrips"
+layout: single
+comments: true
+classes: wide
+---
 
 Fbprophet is a time-series forecasting package open-sourced by Facebook in 2017. This is an additive model which provides intuitive input parameters, allowing users with domain knowledge to tweak it with very little statistical knowledge of the internals. Part of the intuitiveness stems because it allows users to specify holidays and changepoints and also use user-added seasonality as input. In this blog post, we are going to exchange some ideas on how to use the package better.
 
@@ -230,22 +236,22 @@ print("MAE in baseline forecast: INR {:.1f}".format(mean_absolute_error(test['y'
 
 When we initialise a Prophet model, we have a handful of features which we could tune to improve our forecast.
 
-1. `growth='linear'| 'logistic'` : Since the stock symbol as financial instrument does not really have an upper limit to its value, we will use Prophet's linear model. If you were to forecast things which can have a saturating growth, like computing capacity in a server or human population in a given area, we could go with the logistic model.
+  1. `growth='linear'| 'logistic'` : Since the stock symbol as financial instrument does not really have an upper limit to its value, we will use Prophet's linear model. If you were to forecast things which can have a saturating growth, like computing capacity in a server or human population in a given area, we could go with the logistic model.
 
-2. `Changepoints`: Prophet accomodates a list of dates as input if we wanted it to keep it from calculating them instead. These dates can be passed via the `changepoints` attribute. If this attribute is not provided, it then picks 
-`n_changepoints` from the first `changepoint_range` range of the data. For example, default values for these are: `n_changepoints=25` & `changepoint_range=0.8`, this means that we are asking the model to uniformly sample 25 points from the first 80% of the training data. These should be used to indicate abrupt changes in the behaviour of the time series. In case of stock symbols, it may be a good idea to include the dates at which quarterly results were announced.
+  2. `Changepoints`: Prophet accomodates a list of dates as input if we wanted it to keep it from calculating them instead. These dates can be passed via the `changepoints` attribute. If this attribute is not provided, it then picks 
+  `n_changepoints` from the first `changepoint_range` range of the data. For example, default values for these are: `n_changepoints=25` & `changepoint_range=0.8`, this means that we are asking the model to uniformly sample 25 points from the first 80% of the training data. These should be used to indicate abrupt changes in the behaviour of the time series. In case of stock symbols, it may be a good idea to include the dates at which quarterly results were announced.
 
-3. `changepoint_prior_scale`: controls the model's flexibility to including changepoints. In my experience, `changepoint_prior_scale` has been more useful than specifying `changepoints` dates or specifying the `changepoint_range`. 
+  3. `changepoint_prior_scale`: controls the model's flexibility to including changepoints. In my experience, `changepoint_prior_scale` has been more useful than specifying `changepoints` dates or specifying the `changepoint_range`. 
 
-4. `yearly_seasonality`, `weekly_seasonality` and `daily_seasonality` attributes control the seasonality that the model should capture.  The model captures these seasonalities as additive components in the forecast, which sometimes helps in observing if the model has captured the data correctly. I usually turns these off and add seasonal regressors using the `add_seasonality` feature.
+  4. `yearly_seasonality`, `weekly_seasonality` and `daily_seasonality` attributes control the seasonality that the model should capture.  The model captures these seasonalities as additive components in the forecast, which sometimes helps in observing if the model has captured the data correctly. I usually turns these off and add seasonal regressors using the `add_seasonality` feature.
 
-5. We can control how the `holidays` affect our model by passing a column `prior_scale` along a dataframe of dates and holiday names. This dataframe can additionally include the range of days around the holiday date as part of the holiday. A row for the Christmas holiday week, could have `upper_window=7` and `lower_window=0` which will then include 25th Dec to 2nd Jan as holidays. If we don't want to specify dates, we could use `holidays_prior_scale` parameter to control the strength of the holiday component in the model. Its default value is 10.0.
+  5. We can control how the `holidays` affect our model by passing a column `prior_scale` along a dataframe of dates and holiday names. This dataframe can additionally include the range of days around the holiday date as part of the holiday. A row for the Christmas holiday week, could have `upper_window=7` and `lower_window=0` which will then include 25th Dec to 2nd Jan as holidays. If we don't want to specify dates, we could use `holidays_prior_scale` parameter to control the strength of the holiday component in the model. Its default value is 10.0.
 
-6. The `seasonality_mode` parameter which defaults to `'additive'` means that components are added to the trend. From the [official documentation](https://facebook.github.io/prophet/docs/multiplicative_seasonality.html), when "the seasonality is not a constant additive factor as assumed by Prophet, rather it grows with the trend. This is multiplicative seasonality." and that is when we should set the `seasonality_mode=multiplicative`. `seasonality_prior_scale`: Larger values allow the model to fit larger seasonal fluctuations, smaller values dampen the seasonality. Can be specified for individual seasonalities using add_seasonality."
+  6. The `seasonality_mode` parameter which defaults to `'additive'` means that components are added to the trend. From the [official documentation](https://facebook.github.io/prophet/docs/multiplicative_seasonality.html), when "the seasonality is not a constant additive factor as assumed by Prophet, rather it grows with the trend. This is multiplicative seasonality." and that is when we should set the `seasonality_mode=multiplicative`. `seasonality_prior_scale`: Larger values allow the model to fit larger seasonal fluctuations, smaller values dampen the seasonality. Can be specified for individual seasonalities using add_seasonality."
 
-7. `interval_width` sets the width of the confidence interval around the forecast. 
+  7. `interval_width` sets the width of the confidence interval around the forecast. 
 
-We have gone ahead and disabled all seasonality parameters which appear by default in the model. Additionally, we have increased the `changepoint_prior_scale` by a small amount (0.02).
+  We have gone ahead and disabled all seasonality parameters which appear by default in the model. Additionally, we have increased the `changepoint_prior_scale` by a small amount (0.02).
 
 
 ```python

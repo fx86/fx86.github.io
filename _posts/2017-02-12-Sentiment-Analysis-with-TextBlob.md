@@ -2,6 +2,7 @@
 layout: single
 title: Sentiment analysis with textblob
 comments: true
+classes: wide
 ---
 
 ![sentiment-analysis-meme](/images/algorithms_can.jpg){:class="img-responsive"}

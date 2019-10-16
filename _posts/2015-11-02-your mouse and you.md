@@ -1,9 +1,6 @@
 ---
 layout: single
-classes:
-  - landing
-  - dark-theme
-title: your mouse and you
+title: Your mouse and you
 comments: true
 ---
 
