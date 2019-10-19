@@ -13,8 +13,7 @@ Fast forwarding to 2017, the same guy who was looking for renting places is now 
 
 There was no way he was going to filter-search-trawl-and-repeat to get to a place. The road forked; it was going to be either - approach a real estate agent or scrape this data. He chose the latter.
 
-![old is gold](http://www.geekycube.com/wp-content/uploads/housing-maps.png)
-<small> source: http://www.geekycube.com/wp-content/uploads/housing-maps.png </small>
+![old is gold](/images/housing-maps.png)
 
 ## Scraping it!
 
