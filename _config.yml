@@ -59,7 +59,7 @@ analytics:
 # Site Author
 author:
   name             : "Fibinse"
-  avatar           : "/images/avatar.jpg"
+  avatar           : "/assets/images/avatar.jpg"
   bio              : "Data scientist, new-media art hogger, loves samosas"
   location         : "Delhi, India"
   email            :  
