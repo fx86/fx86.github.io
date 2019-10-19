@@ -51,9 +51,9 @@ social:
 
 # Analytics
 analytics:
-  provider               : google # false (default), "google", "google-universal", "custom"
-  google:
-    tracking_id          : UA-54134019-3
+  provider               : false # false (default), "google", "google-universal", "custom"
+  # google:
+  #   tracking_id          : UA-54134019-3
 
 
 # Site Author
@@ -204,12 +204,12 @@ compress_html:
 # Defaults
 defaults:
   # _pages
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: single
-      author_profile: true
+  # - scope:
+  #     path: ""
+  #     type: pages
+  #   values:
+  #     layout: single
+  #     author_profile: true
 
   # _posts
   - scope:
