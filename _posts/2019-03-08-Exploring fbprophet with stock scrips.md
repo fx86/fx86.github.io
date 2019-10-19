@@ -1,8 +1,13 @@
 ---
+
 title: "Exploring fbprophet with stock scrips"
 layout: single
 comments: true
 classes: wide
+header:
+    image: /assets/images/Exploring_fbprophet_on_stock_scrips_files/header.jpg
+    show_overlay_excerpt: true
+    
 ---
 
 Fbprophet is a time-series forecasting package open-sourced by Facebook in 2017. This is an additive model which provides intuitive input parameters, allowing users with domain knowledge to tweak it with very little statistical knowledge of the internals. Part of the intuitiveness stems because it allows users to specify holidays and changepoints and also use user-added seasonality as input. In this blog post, we are going to exchange some ideas on how to use the package better.
@@ -121,7 +126,7 @@ _ = data.set_index('Date')['Close'].plot()
 ```
 
 
-![png](/assets/images/Exploring%20fbprophet%20on%20stock%20scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_4_0.png)
+![png](/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_4_0.png)
 
 
 Part of the reason for this stock's meteoric spike was its purchase of Jaguar & Land Rover brands (JLR) in July 2008. 
@@ -156,7 +161,7 @@ df.shape
 
 
 
-![png](/assets/images/Exploring%20fbprophet%20on%20stock%20scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_6_2.png)
+![png](/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_6_2.png)
 
 
 The `fbprophet` model interface is similar to the one provided by `sklearn`. Before that, we will split the time series that we visualised above into a training and testing set. 
@@ -214,7 +219,7 @@ _ = model.plot(future)
 ```
 
 
-![png](/assets/images/Exploring%20fbprophet%20on%20stock%20scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_14_0.png)
+![png](/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_14_0.png)
 
 
 We will use the mean absolute error function to calculate the error in our forecast.
@@ -284,7 +289,7 @@ _ = _.plot(title='Prediction vs Actual')
 
 
 
-![png](/assets/images/Exploring%20fbprophet%20on%20stock%20scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_20_1.png)
+![png](/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_20_1.png)
 
 
 There is quite a bit of work to be done to improve the forecast as the plotted components tell us below.
@@ -295,7 +300,7 @@ _ = model.plot_components(future)
 ```
 
 
-![png](/assets/images/Exploring%20fbprophet%20on%20stock%20scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_22_0.png)
+![png](/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_22_0.png)
 
 
 The trend-plot in the first diagram shows an increasingly spreading confidence interval. Beyond a month of forecast, the trend cannot be really trusted. The yearly component also shows the forecasted nature of the stock symbol: it spikes by 15% at the beginning of the year, hits a trough near September where it falls by a bit more than 20% and tries to recover again in November. Do remember, this is again only the forecasted components.
@@ -315,7 +320,7 @@ a = add_changepoints_to_plot(axes, model, future)
 ```
 
 
-![png](/assets/images/Exploring%20fbprophet%20on%20stock%20scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_25_0.png)
+![png](/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_25_0.png)
 
 
 Eyeballing it we can see the points where trend has changed. You can also get the complete series of changepoints as a series. If the detected changepoints do not line up as you expect them to be, you can explicitly set them in the `changepoints` parameter.

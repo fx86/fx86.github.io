@@ -6,3 +6,11 @@
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+h2.archive__item-title > a {
+	text-decoration: none;
+}
+
+p.archive__item-excerpt {
+	font-size: .85 em;
+}
