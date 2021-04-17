@@ -9,7 +9,7 @@ minimal_mistakes_skin    : "air" # "default", "air", "aqua", "contrast", "dark",
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Visualist"
+title                    : "A running commentary on machine learning and data stuff, as they whiz by."
 title_separator          : "-"
 name                     : "Visualist"
 description              : "Machine learning, visualisations and SQL."
@@ -133,6 +133,7 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: true
+  mathjax: true
 
 
 # Sass/SCSS
