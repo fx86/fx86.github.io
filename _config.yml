@@ -5,11 +5,11 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # `jekyll serve`. If you change this file, please restart the server process.
 
-minimal_mistakes_skin    : "air" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "default" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "A running commentary on machine learning and data stuff, as they whiz by."
+title                    : "Fibinse Xavier"
 title_separator          : "-"
 name                     : "Visualist"
 description              : "Machine learning, visualisations and SQL."
@@ -183,10 +183,10 @@ tag_archive:
   type: jekyll-archives
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
 #   layouts:
 #     category: archive-taxonomy
 #     tag: archive-taxonomy

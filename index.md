@@ -2,14 +2,15 @@
 
 title: ""
 layout: single
-classes:
-    wide
 permalink: /
+classes: 
+  - wide
+  - landing
 author_profile: true
-header:
-    overlay_image: /assets/images/splash.jpg
-    overlay_filter: 0.3
+header: 
+    image: /assets/images/splash.jpg
     image_description: ''
+    caption: "Photo credit: [**Unsplash**](https://unsplash.com/photos/uu0cOMPdM2g)"
 
 ---
 

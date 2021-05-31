@@ -1,9 +1,14 @@
 ---
 
+layout: single
 permalink: /about.html
 author_profile: true
 title: "About"
 
 ---
 
-I mean you could have just read the sidebar, instead.
+
+This blog, like everything else, is a work in progress.
+
+
+Email: fibinse [dot] xavier [at] gmail [dot] com
