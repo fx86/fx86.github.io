@@ -5,19 +5,19 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # `jekyll serve`. If you change this file, please restart the server process.
 
-minimal_mistakes_skin    : "contrast" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "default" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "visualist.in"
+title                    : "Fibinse Xavier"
 title_separator          : "-"
 name                     : "Visualist"
-description              : "notes of a visualist"
-url                      : "http://visualist.in"
+description              : "Machine learning, visualisations and SQL."
+url                      : "https://visualist.in"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "fx86/fx86.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-breadcrumbs              : false # true, false (default)
+breadcrumbs              :  # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2" "custom"
@@ -30,38 +30,10 @@ comments:
     appid                :
     num_posts            : # 5 (default)
     colorscheme          : # "light" (default), "dark"
-staticman:
-  allowedFields          : # ['name', 'email', 'url', 'message']
-  branch                 : # "master"
-  commitMessage          : # "New comment."
-  filename               : # comment-{@timestamp}
-  format                 : # "yml"
-  moderation             : # true
-  path                   : # "/_data/comments/{options.slug}" (default)
-  requiredFields         : # ['name', 'email', 'message']
-  transforms:
-    email                : # "md5"
-  generatedFields:
-    date:
-      type               : # "date"
-      options:
-        format           : # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
-reCaptcha:
-  siteKey                :
-  secret                 :
-atom_feed:
-  path                   : # blank (default) uses feed.xml
-search                   : # true, false (default)
-search_full_content      : # true, false (default)
-search_provider          : # lunr (default), algolia
-algolia:
-  application_id         : # YOUR_APPLICATION_ID
-  index_name             : # YOUR_INDEX_NAME
-  search_only_api_key    : # YOUR_SEARCH_ONLY_API_KEY
-  powered_by             : # true (default), false
+
 
 # SEO Related
-google_site_verification :
+google_site_verification : "EXZJmA2SrgIXAKDEKa_4NTK86YBQRhvbBHwU4_ZLf68"
 bing_site_verification   :
 yandex_site_verification :
 naver_site_verification  :
@@ -69,10 +41,6 @@ naver_site_verification  :
 # Social Sharing
 twitter:
   username               : fx86
-facebook:
-  username               :
-  app_id                 :
-  publisher              :
 og_image                 : # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
@@ -83,20 +51,20 @@ social:
 
 # Analytics
 analytics:
-  provider               : google # false (default), "google", "google-universal", "custom"
+  provider               : "google-universal" # false (default), "google", "google-universal", "custom"
   google:
-    tracking_id          : UA-54134019-3
+    tracking_id          : "G-5D708PCPNF"
 
 
 # Site Author
 author:
   name             : "Fibinse"
-  avatar           : "/images/avatar.jpg"
+  avatar           : #"/images/avatar.jpg"
   bio              : "Data scientist, new-media art hogger, loves samosas"
   location         : "Delhi, India"
   email            :  
   uri              :
-  home             : ../home/ # null (default), "absolute or relative url to link to author home"
+  home             :  # null (default), "absolute or relative url to link to author home"
   bitbucket        :
   codepen          :
   github           : fx86
@@ -165,6 +133,7 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: true
+  mathjax: true
 
 
 # Sass/SCSS
@@ -186,8 +155,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
-  - jekyll-remote-theme
-  - jemoji
+  - jekyll-include-cache
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -195,7 +163,7 @@ whitelist:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
-  - jemoji
+  - jekyll-include-cache
 
 
 # Archives
@@ -209,22 +177,22 @@ whitelist:
 #  - <base_path/categories/my-awesome-category/index.html ~> path: /categories/
 #  - <base_path/my-awesome-category/index.html ~> path: /
 category_archive:
-  type: liquid
+  type: jekyll-archives
   path: /categories/
 tag_archive:
-  type: liquid
+  type: jekyll-archives
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
 jekyll-archives:
   enabled:
     - categories
     - tags
-  layouts:
-    category: archive-taxonomy
-    tag: archive-taxonomy
-  permalinks:
-    category: /categories/:name/
-    tag: /tags/:name/
+#   layouts:
+#     category: archive-taxonomy
+#     tag: archive-taxonomy
+#   permalinks:
+#     category: /categories/:name/
+#     tag: /tags/:name/
 
 
 # HTML Compression
@@ -234,9 +202,16 @@ compress_html:
   ignore:
     envs: development
 
-
 # Defaults
 defaults:
+  # _pages
+  # - scope:
+  #     path: ""
+  #     type: pages
+  #   values:
+  #     layout: single
+  #     author_profile: true
+
   # _posts
   - scope:
       path: ""
