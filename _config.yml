@@ -5,7 +5,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # `jekyll serve`. If you change this file, please restart the server process.
 
-minimal_mistakes_skin    : "default" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "sunrise" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
@@ -51,17 +51,17 @@ social:
 
 # Analytics
 analytics:
-  provider               : "google-universal" # false (default), "google", "google-universal", "custom"
+  provider               : "google" # false (default), "google", "google-universal", "custom"
   google:
     tracking_id          : "G-5D708PCPNF"
 
 
 # Site Author
 author:
-  name             : "Fibinse"
+  name             : "hey!"
   avatar           : #"/images/avatar.jpg"
-  bio              : "Data scientist, new-media art hogger, loves samosas"
-  location         : "Delhi, India"
+  bio              : "I'm a staff data scientist, new-media art hogger and I used to love samosas"
+  location         : "Remote"
   email            :  
   uri              :
   home             :  # null (default), "absolute or relative url to link to author home"
@@ -72,9 +72,9 @@ author:
   keybase          :
   instagram        :
   lastfm           :
-  linkedin         : # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
+  linkedin         : https://www.linkedin.com/in/fibinse/ # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
   stackoverflow    : 170005/fixxxer # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
-  twitter          : fx86
+  twitter          : 
   youtube          : # "https://youtube.com/c/MichaelRoseDesign"
 
 
@@ -156,6 +156,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-remote-theme
 
 # mimic GitHub Pages with --safe
 whitelist:
