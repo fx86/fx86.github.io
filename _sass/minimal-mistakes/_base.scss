@@ -30,9 +30,7 @@ h6 {
   margin: 2em 0 0.5em;
   line-height: 1.2;
   font-family: $header-font-family;
-  font-weight: regular;
-  color: $darker-gray;
-  font-size: 1.2em;
+  font-weight: bold;
 }
 
 h1 {
@@ -132,14 +130,13 @@ a {
     @extend %tab-focus;
   }
 
-  &:hover,
-  &:active {
-    color: $link-color-hover;
-    outline: 0;
-  }
-
   &:visited {
     color: $link-color-visited;
+  }
+
+  &:hover {
+    color: $link-color-hover;
+    outline: 0;
   }
 }
 
@@ -157,7 +154,6 @@ kbd,
 samp,
 pre {
   font-family: $monospace;
-  font-size: $type-size-5dot5;
 }
 
 pre {
@@ -171,7 +167,7 @@ figcaption > code,
 td > code {
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
-  font-size: $type-size-7;
+  font-size: 0.8em;
   background: $code-background-color;
   border-radius: $border-radius;
 

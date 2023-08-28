@@ -1,6 +1,6 @@
 ---
+title: "House hunting with data"
 layout: single
-title: House hunting with data
 comments: true
 classes: wide
 ---
@@ -13,15 +13,14 @@ Fast forwarding to 2017, the same guy who was looking for renting places is now 
 
 There was no way he was going to filter-search-trawl-and-repeat to get to a place. The road forked; it was going to be either - approach a real estate agent or scrape this data. He chose the latter.
 
-![old is gold](http://www.geekycube.com/wp-content/uploads/housing-maps.png)
-<small> source: http://www.geekycube.com/wp-content/uploads/housing-maps.png </small>
+![old is gold](/assets/images/housing-maps.png)
 
 ## Scraping it!
 
 Open "housing.com" in Google chrome while you are in the Network tab in the console.
 If you nose around long enough, you will notice this jewel of an API - https://search.housing.com/api/v1/buy/similar-properties?source=web&limit=4&flat_id=
 
-![view of the console](/images/chrome_console.png)
+![view of the console](/assets/images/chrome_console.png)
 
 And, this is all you need. The readable naming convention seems to hint that it's their recommendation API. I tried a few combinations and settled down with a _limit=50_. What happened next was pretty simple as you must have guessed - you query this API for a *flat_id* and it would return a JSON response containing a few other flat IDs. You save this data somewhere and repeat the process with each of the new *flat_ids*. And, alas, you have a scraper. 
 
@@ -203,7 +202,7 @@ df_temp.apply(lambda v: (v.Total - v.Empty)/float(v.Total) * 100).plot(kind='bar
 
 
 
-![png](/images/output_24_1.png)
+![png](/assets/images/output_24_1.png)
 
 
 From the above visual we gather that, *developer_name* column is almost empty. Giving it company are, the *sub_locality*, *housing_region* and *locality* columns.
@@ -243,7 +242,7 @@ sns.countplot(y="state", data=temp, palette="Blues_d")
 
 
 
-![png](/images/output_30_1.png)
+![png](/assets/images/output_30_1.png)
 
 
 ### And how about the price distribution ?
@@ -266,7 +265,7 @@ plt.title("Listing prices across states")
 
 
 
-![png](/images/output_33_1.png)
+![png](/assets/images/output_33_1.png)
 
 
 ### What about the metro cities, then ?
@@ -298,7 +297,7 @@ plt.title("Listing prices across metro cities")
 
 
 
-![png](/images/output_36_1.png)
+![png](/assets/images/output_36_1.png)
 
 
 Apparently, Mumbai lags behind New Delhi in prices. Though it would be interesting to track down for Maharashtra's price lead as a state, but we will take a raincheck on it. Remember, we are house hunting in Delhi because yours-truly resides there.
@@ -319,7 +318,7 @@ plt.title("price variation across appartment type")
 
 
 
-![png](/images/output_39_1.png)
+![png](/assets/images/output_39_1.png)
 
 
 Appartment types - 4, 5, 6, 7, 45 - seems to show a broad range of prices than the rest.
@@ -346,7 +345,7 @@ sns.pairplot(df_temp)
 
 
 
-![png](/images/output_43_1.png)
+![png](/assets/images/output_43_1.png)
 
 
 To bring out the correlations more sharply, let's create a heatmap
@@ -366,7 +365,7 @@ sns.heatmap((temp[features].corr() * 100).applymap(int), annot=True, fmt="d", ax
 
 
 
-![png](/images/output_45_1.png)
+![png](/assets/images/output_45_1.png)
 
 
 Alright, so which of the ammenities affect the housing prices much ?
@@ -387,7 +386,7 @@ sns.heatmap((df_temp.corr() * 100).applymap(int), annot=True, fmt="d", ax=ax, li
 
 
 
-![png](/images/output_47_1.png)
+![png](/assets/images/output_47_1.png)
 
 
 Wow, it seems price has the most correlation with the availability of gas.
@@ -411,7 +410,7 @@ sns.heatmap((df_temp.corr() * 100).applymap(int), annot=True,  fmt="d", ax=ax, l
 
 
 
-![png](/images/output_49_1.png)
+![png](/assets/images/output_49_1.png)
 
 
 As we see above, the factors affecting price are the availability of gas, a lift, a parking space and to some extent a gated community. 
@@ -424,7 +423,7 @@ Let's look at only the 2,3 and 4 bedroom houses in Delhi which are priced at les
 
 *Because*, this scatterplot that helps you explore this is an interactive chart, it would be best, if you would follow along at this [link](https://nbviewer.jupyter.org/github/fx86/housing.com/blob/master/housing.ipynb#The-cheapest-2/3-BHK-in-New-Delhi-?)
 
-![png](/images/housing_scatterplot.png)
+![png](/assets/images/housing_scatterplot.png)
 
 Further :
 - it would be nice idea to let the user (me) click on a circle to directly open the listing without having to open the browser. Bokeh 0.15 has a bug with JSON parsing, which I need to get to fixing or wait for the 0.16 version.

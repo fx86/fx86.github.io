@@ -1,3 +1,10 @@
+---
+layout: single
+title: A checklist for debugging cronjobs
+comments: true
+classes: wide
+---
+
 This is a non-exhaustive list of gotchas that I've found myself run into 
 time and again when I have to put a scraper or a model on a
 cron job. By following these steps you should be able to debug

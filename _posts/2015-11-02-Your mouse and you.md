@@ -1,9 +1,6 @@
 ---
 layout: single
-classes:
-  - landing
-  - dark-theme
-title: your mouse and you
+title: Your mouse and you
 comments: true
 ---
 
@@ -27,12 +24,12 @@ There are two reasons for that, according to my usage -
 
 Now, visualizing this data from the Windows machine actually shows the most active areas of cursor activity and places that I leave my cursor waiting The black circles are places I let my mouse cursor idle; the longer it idles, the bigger they are. You can see the many number of trips to the program-launcher at the bottom of the screen and how the middle-to-right quadrant of the screen is a very busy traffic area. Reason being Windows likes to place apps in this region when they are launched and hence the mouse activity between them.
 
-![png](/images/mouse_cursor_behaviour.png)
+![png](/assets/images/mouse_cursor_behaviour.png)
 
 In total I figured I’ve used my mouse for almost an hour for the four hour period that I had gathered data for. And my wrists had moved my mouse a good 163 meters (assuming, 1 meter ~ 3779 pixels).
 
 That’s a lot of —
 
-![gif](/images/monkey_and_mouse.gif)
+![gif](/assets/images/monkey_and_mouse.gif)
 
 Keyboard shortcuts, anyone ?

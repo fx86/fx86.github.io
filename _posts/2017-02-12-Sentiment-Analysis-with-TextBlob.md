@@ -2,9 +2,10 @@
 layout: single
 title: Sentiment analysis with textblob
 comments: true
+classes: wide
 ---
 
-![sentiment-analysis-meme](/images/algorithms_can.jpg){:class="img-responsive"}
+![sentiment-analysis-meme](/assets/images/algorithms_can.jpg){:class="img-responsive"}
 <br>
 Sentiment analysis is the _art_ of training an algorithm to classify text as positive/negative. 
 Follow along to build a basic sentiment analyser which is trained on twitter data.
@@ -103,7 +104,7 @@ tweet_data[['nb_sentiment', 'nb_pos', 'nb_neg']] = tweet_data.text.apply(lambda 
 tweet_data.head()
 {% endhighlight %}
 
-![image-title-here](/images/sentiments_in_a_table.png){:class="img-responsive"}
+![image-title-here](/assets/images/sentiments_in_a_table.png){:class="img-responsive"}
 
 Let's try doing the same with `textblob`'s in-built Pattern analyser - 
 
@@ -117,6 +118,6 @@ tweet_data[['pattern_pos', 'nb_pos']].hist()
 
 Observe the difference in the results - 
 
-![image-title-here](/images/sentiment_histogram.jpg){:class="img-responsive"}
+![image-title-here](/assets/images/sentiment_histogram.jpg){:class="img-responsive"}
 
 P.S: `textblob` is just one of the packages available in Python that can be used to perform sentiment analysis. Other capable packages that we know of would be - `nltk`, `scikit-learn`, `VADER`.
