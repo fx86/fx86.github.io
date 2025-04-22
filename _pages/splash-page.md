@@ -16,11 +16,11 @@ intro:
   - excerpt: 'Recent projects'
 
 feature_row2:
-  - image_path: /assets/images/onepage_logo.png
-    alt: "One page"
-    title: "One Page"
-    excerpt: 'It provides a minimalistic distraction-free centre point for the latest in tech from close to eight hundred companies. <br><br> Built with `Django` and `Postgres`. <br>'
-    url: "https://read.visualist.in/"
+  - image_path: /assets/images/newsful_logo.png
+    alt: "Newsful"
+    title: "Newsful"
+    excerpt: 'Newsful.ai delivers real-time, bite-sized summaries of top stories in politics, business, finance, and global affairs—so you stay informed without the noise.'
+    url: "https://newsful.ai"
     btn_label: "Read"
     btn_class: "btn--primary"
 ---
