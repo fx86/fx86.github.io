@@ -23,6 +23,7 @@ feature_row2:
     url: "https://newsful.ai"
     btn_label: "Read"
     btn_class: "btn--primary"
+    image_link: true  # This explicitly enables image linking
 ---
 
 {% include feature_row id="feature_row2" type="left" %}
