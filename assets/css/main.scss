@@ -12,5 +12,58 @@ h2.archive__item-title > a {
 }
 
 p.archive__item-excerpt {
-	font-size: .85 em;
+	font-size: .85em;
+}
+
+ul.post-list {
+	font-size: .8em;
+}
+ul.post-list a {
+	text-decoration: none;
+}
+ul.post-list a:hover {
+	text-decoration: underline;
+}
+ul.post-list a:visited {
+	text-decoration: none;
+}
+ul.post-list a:visited:hover {
+	text-decoration: underline;
+}
+ul.post-list a:active {
+	text-decoration: none;
+}
+
+// CSS for splash page
+
+/* Two-column layout for projects page */
+.two-column-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  width: 100%;
+}
+
+.column {
+  flex: 1 1 45%;
+  min-width: 300px;
+  box-sizing: border-box;
+}
+
+/* Override any full-width behavior */
+.feature__wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Ensure elements stay in their columns */
+.feature__item--full {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 768px) {
+  .column {
+    flex: 1 1 100%;
+  }
 }

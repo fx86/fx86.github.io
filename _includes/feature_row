@@ -4,50 +4,33 @@
   {% assign feature_row = page.feature_row %}
 {% endif %}
 
-<div class="feature__wrapper">
-
+<div class="feature__wrapper" style="display: flex; flex-wrap: wrap; width: 100%;">
   {% for f in feature_row %}
-
-    {% if f.url contains "://" %}
-      {% capture f_url %}{{ f.url }}{% endcapture %}
-    {% else %}
-      {% capture f_url %}{{ f.url | relative_url }}{% endcapture %}
-    {% endif %}
-
-    <div class="feature__item{% if include.type %}--{{ include.type }}{% endif %}">
-      <div class="archive__item">
-        {% if f.image_path %}
-          <div class="archive__item-teaser">
-            <img src=
-              {% if f.image_path contains "://" %}
-                "{{ f.image_path }}"
-              {% else %}
-                "{{ f.image_path | relative_url }}"
-              {% endif %}
-            alt="{% if f.alt %}{{ f.alt }}{% endif %}">
-            {% if f.image_caption %}
-              <span class="archive__item-caption">{{ f.image_caption | markdownify | remove: "<p>" | remove: "</p>" }}</span>
-            {% endif %}
-          </div>
-        {% endif %}
-
-        <div class="archive__item-body">
-          {% if f.title %}
-            <h2 class="archive__item-title">{{ f.title }}</h2>
-          {% endif %}
-
-          {% if f.excerpt %}
-            <div class="archive__item-excerpt">
-              {{ f.excerpt | markdownify }}
-            </div>
-          {% endif %}
-
-          {% if f.url %}
-            <p><a href="{{ f_url }}" class="btn {{ f.btn_class }}">{{ f.btn_label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a></p>
+    <div class="feature__item{% if include.type %}--{{ include.type }}{% endif %}"
+         style="width: 100%; margin-bottom: 1em; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 0.5em; display: flex; align-items: flex-start;">
+      {% if f.image_path %}
+        <div class="archive__item-teaser" style="display: flex; align-items: left; min-width: 40px;">
+          <img src="{% if f.image_path contains '://' %}{{ f.image_path }}{% else %}{{ f.image_path | relative_url }}{% endif %}"
+               alt="{% if f.alt %}{{ f.alt }}{% endif %}"
+               style="height: auto; max-width: 100%; border-radius: 18px; object-fit: contain;" />
+          {% if f.image_caption %}
+            <span class="archive__item-caption">{{ f.image_caption | markdownify | remove: "<p>" | remove: "</p>" }}</span>
           {% endif %}
         </div>
+      {% endif %}
+      <div class="archive__item-body" style="flex: 1;">
+        {% if f.title %}
+          <h2 class="archive__item-title">{{ f.title }}</h2>
+        {% endif %}
+        {% if f.excerpt %}
+          <div class="archive__item-excerpt">
+            {{ f.excerpt | markdownify }}
+          </div>
+        {% endif %}
+        {% if f.url %}
+          <p><a href="{{ f.url }}" class="btn {{ f.btn_class }}">{{ f.btn_label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a></p>
+        {% endif %}
       </div>
     </div>
   {% endfor %}
-
 </div>

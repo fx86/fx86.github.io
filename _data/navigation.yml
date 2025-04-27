@@ -1,8 +1,6 @@
 # main links
 main:
-  - title: "Projects"
-    url: projects/
+  - title: "Blog"
+    url: Archive/
   - title: "About"
     url: about/
-  # - title: "Blog"
-  #   url: archive/

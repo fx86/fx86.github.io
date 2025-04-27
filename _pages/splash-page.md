@@ -1,29 +1,39 @@
 ---
-title: " "
+title: "Data Science & AI Solutions | Fibinse Xavier"
 layout: splash
-permalink: /projects/
-date: 2021-05-31T11:48:41+05:30
-header:
-  overlay_image: /assets/images/tinkering.jpg
-  # overlay_color: "#000"
-  # overlay_filter: "0.1"
-  # actions:
-  #   - label: "Download"
-  #     url: "https://github.com/mmistakes/minimal-mistakes/"
-  # caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
-# excerpt: "Bacon ipsum dolor sit amet salami ham hock ham, hamburger corned beef short ribs kielbasa biltong t-bone drumstick tri-tip tail sirloin pork chop."
-intro: 
-  - excerpt: 'Recent projects'
-
-feature_row2:
-  - image_path: /assets/images/newsful_logo.png
-    alt: "Newsful"
-    title: "Newsful"
-    excerpt: 'Newsful.ai delivers real-time, bite-sized summaries of top stories in politics, business, finance, and global affairs—so you stay informed without the noise.'
+permalink: /
+date: 2025-04-28T00:00:00+05:30
+header: false
+feature_row:
+  - image_path: assets/images/newsful_logo.png
+    alt: "Newsful - Data Science Project"
+    title: "Newsful AI"
+    excerpt: "Uses generative AI to provide bite-sized summaries of top stories in business, finance, and global affairs."
     url: "https://newsful.ai"
-    btn_label: "Read"
+    btn_label: "Explore!"
     btn_class: "btn--primary"
-    image_link: true  # This explicitly enables image linking
 ---
 
-{% include feature_row id="feature_row2" type="left" %}
+
+<div class="two-column-container">
+  <!-- Left Column -->
+  <div class="column">
+    <h2 class="archive__item-title">Lab</h2>
+    {% include feature_row %}
+  </div>
+  
+  <!-- Right Column -->
+  <div class="column">
+    <h2 class="archive__item-title">Blog</h2>
+    <ul class="post-list">
+      {% assign recent_posts = site.posts | slice: 0, 10 %}
+      {% for post in recent_posts %}
+          <a href="{{ post.url }}">{{ post.title }}</a>
+          <p class="page__meta">
+            <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+            {{ post.date | date: "%B %d, %Y" }}
+          </p>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

@@ -5,19 +5,19 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # `jekyll serve`. If you change this file, please restart the server process.
 
-minimal_mistakes_skin    : "sunrise" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "default" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Fibinse Xavier"
-title_separator          : "-"
-name                     : "Visualist"
-description              : "Machine learning, visualisations and SQL."
+title                    : "Fibinse"
+title_separator          : "|"
+name                     : "Fibinse Xavier"
+description              : "Expert insights on data science, machine learning, AI engineering, and data visualization from an experienced practitioner."
 url                      : "https://visualist.in"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "fx86/fx86.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-breadcrumbs              :  # true, false (default)
+teaser                   : "/assets/images/data-science-teaser.jpg" # path of fallback teaser image
+breadcrumbs              : true # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2" "custom"
@@ -60,7 +60,8 @@ analytics:
 author:
   name             : "hey!"
   avatar           : #"/images/avatar.jpg"
-  bio              : "I'm a staff data scientist, new-media art hogger and I used to love samosas"
+  bio              : "Data wizard, GenAI explorer, new-media art enthusiast, and recovering samosa addict 
+  [prompt: make it sound cooler than it is.]"
   location         : "Remote"
   email            :  
   uri              :

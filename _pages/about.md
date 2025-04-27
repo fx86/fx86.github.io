@@ -8,7 +8,7 @@ title: "About"
 ---
 
 
-This blog, like everything else, is a work in progress.
+Building at the intersection of data science and AI creativity — where my code-editor is smarter than I am and my solutions occasionally work on the first try.
 
 
 Email: fibinse [dot] xavier [at] gmail [dot] com
