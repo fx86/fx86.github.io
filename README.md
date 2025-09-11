@@ -1,6 +1,4 @@
-[![pages-build-deployment](https://github.com/fx85/fx86.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/fx85/fx86.github.io/actions/workflows/pages/pages-build-deployment)
-
-
+[![Quarto Publish](https://github.com/fx86/fx86.github.io/actions/workflows/golive.yml/badge.svg?branch=master)](https://github.com/fx86/fx86.github.io/actions/workflows/golive.yml)
 
 # Blog
 
