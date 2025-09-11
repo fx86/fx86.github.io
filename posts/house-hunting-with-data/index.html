@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="fibinse">
+<meta name="dcterms.date" content="2017-04-12">
+
+<title>visualist.in - House hunting with data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-XXXXXXXX-X', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<!-- Load fonts similar to Mickaël Canouil's site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;family=Merriweather:wght@300;400;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --site-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --site-serif: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
+    --accent: #2b6cb0;
+    --muted: #6b7280;
+    --bg: #ffffff;
+  }
+</style>
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-XXXXXXXX-X');
+</script>
+<!-- End Google Analytics -->
+<meta name="disqus-shortname" content="visualist-1">
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">visualist.in</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../archive.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fx86"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/fx86"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">House hunting with data</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>fibinse </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 12, 2017</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<form action="https://buttondown.com/api/emails/embed-subscribe/fibinse" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/fibinse', 'popupwindow')" class="embeddable-buttondown-form">
+  <label for="bd-email">Enter your email</label>
+  <input type="email" name="email" id="bd-email">
+  
+  <input type="submit" value="Subscribe">
+  <p>
+    <a href="https://buttondown.com/refer/fibinse" target="_blank">Powered by Buttondown.</a>
+  </p>
+</form>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#scraping-it" id="toc-scraping-it" class="nav-link active" data-scroll-target="#scraping-it">Scraping it!</a></li>
+  <li><a href="#can-you-smell-all-that-data" id="toc-can-you-smell-all-that-data" class="nav-link" data-scroll-target="#can-you-smell-all-that-data">Can you smell all that data ?!</a>
+  <ul class="collapse">
+  <li><a href="#missing-values-in-data" id="toc-missing-values-in-data" class="nav-link" data-scroll-target="#missing-values-in-data">Missing values in data</a></li>
+  <li><a href="#what-does-the-distribution-of-listings-across-states-look-like" id="toc-what-does-the-distribution-of-listings-across-states-look-like" class="nav-link" data-scroll-target="#what-does-the-distribution-of-listings-across-states-look-like">What does the distribution of listings across states look like ?</a></li>
+  <li><a href="#and-how-about-the-price-distribution" id="toc-and-how-about-the-price-distribution" class="nav-link" data-scroll-target="#and-how-about-the-price-distribution">And how about the price distribution ?</a></li>
+  <li><a href="#what-about-the-metro-cities-then" id="toc-what-about-the-metro-cities-then" class="nav-link" data-scroll-target="#what-about-the-metro-cities-then">What about the metro cities, then ?</a></li>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations">Correlations</a></li>
+  <li><a href="#the-cheapest-23-bhk-in-new-delhi" id="toc-the-cheapest-23-bhk-in-new-delhi" class="nav-link" data-scroll-target="#the-cheapest-23-bhk-in-new-delhi">The cheapest 2/3 BHK in New Delhi ?</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fx86/fx86.github.io/edit/main/posts/house-hunting-with-data/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fx86/fx86.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Back in 2013, housing.com was exactly what I wanted - an easy to navigate, color-coded rental map of places. I could consume more information without having to trawl through tiring listing after listing (which was exactly what almost all other websites offered).</p>
+<p>(I loved them for putting out exactly what I had in mind and I also remember congratulating myself for having their vision! :=P)</p>
+<p>Fast forwarding to 2017, the same guy who was looking for renting places is now looking for a home to purchase. Alas, housing.com has gone back to being a decorative listing place (no surprise there).</p>
+<p>There was no way he was going to filter-search-trawl-and-repeat to get to a place. The road forked; it was going to be either - approach a real estate agent or scrape this data. He chose the latter.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/housing-maps.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">old is gold</figcaption><p></p>
+</figure>
+</div>
+<section id="scraping-it" class="level2">
+<h2 class="anchored" data-anchor-id="scraping-it">Scraping it!</h2>
+<p>Open “housing.com” in Google chrome while you are in the Network tab in the console. If you nose around long enough, you will notice this jewel of an API - https://search.housing.com/api/v1/buy/similar-properties?source=web&amp;limit=4&amp;flat_id=</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/chrome_console.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">view of the console</figcaption><p></p>
+</figure>
+</div>
+<p>And, this is all you need. The readable naming convention seems to hint that it’s their recommendation API. I tried a few combinations and settled down with a <em>limit=50</em>. What happened next was pretty simple as you must have guessed - you query this API for a <em>flat_id</em> and it would return a JSON response containing a few other flat IDs. You save this data somewhere and repeat the process with each of the new <em>flat_ids</em>. And, alas, you have a scraper.</p>
+<p>The scraper in all its uglyness is <a href="https://github.com/fx86/housing.com/blob/master/scraper.py">here</a>.</p>
+<p>This lazy script got me around 25 thousand listings in a span of a week.</p>
+</section>
+<section id="can-you-smell-all-that-data" class="level2">
+<h2 class="anchored" data-anchor-id="can-you-smell-all-that-data">Can you smell all that data ?!</h2>
+<p>New Year 2017 resolution: When you have data lying around, visualize it!</p>
+<p>And, so we went. I was happy with Pandas and its plotting extensions with a smattering of Seaborn colors schemes and aesthetics for the most part of it.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The following are my default imports</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.options.display.mpl_style <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>, color_codes<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># I wanted to be able to read the long addresses so I increased the column width</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_colwidth'</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, that I had imported all the packages that I needed to begin with, I did what all of you would do, with the data.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"housing.csv"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(58551, 227)</code></pre>
+<p>The data set initially was 58 thousand rows long and 227 columns wide. This was because there was a lot of overlap; thanks in-part to the nested JSON structure and save duplicates listings.</p>
+<p>While the script was humming along, I had pretty-printed it and found some columns of interest.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> {<span class="st">"completion_date"</span>:<span class="st">"completed_on"</span>,<span class="st">"ctr"</span>:<span class="st">"CTR"</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"date_added"</span>:<span class="st">"date_added"</span>,<span class="st">"date_added_in_seconds"</span>:<span class="st">"listing_date_seconds"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"developer_name"</span>:<span class="st">"developer_name"</span>,<span class="st">"featured_type"</span>:<span class="st">"featured_type"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"impressions"</span>:<span class="st">"impressions"</span>,<span class="st">"inventory_amenities_has_gas_pipeline"</span>:<span class="st">"has_gas"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_amenities_has_gym"</span>:<span class="st">"has_gym"</span>,<span class="st">"inventory_amenities_has_lift"</span>:<span class="st">"has_lift"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_amenities_has_parking"</span>:<span class="st">"has_parking"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_amenities_has_servant_room"</span>:<span class="st">"has_servant_room"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_amenities_has_swimming_pool"</span>:<span class="st">"has_pool"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_amenities_is_gated_community"</span>:<span class="st">"has_gated_community"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_canonical_url"</span>:<span class="st">"URL"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_apartment_type_id"</span>:<span class="st">"appt_type_id"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_area"</span>:<span class="st">"area"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_facing"</span>:<span class="st">"facing"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_is_available"</span>:<span class="st">"is_available"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_number_of_bedrooms"</span>:<span class="st">"bedrooms"</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_number_of_toilets"</span>:<span class="st">"toilets"</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_parking_count"</span>:<span class="st">"parking_count"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_per_sqft_rate"</span>:<span class="st">"sqft_rate"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_price"</span>:<span class="st">"price"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"inventory_configs_0_property_type_id"</span>:<span class="st">"property_type"</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"is_blocked"</span>:<span class="st">"is_blocked"</span>,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"is_featured"</span>:<span class="st">"is_featured"</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"is_uc_property"</span>:<span class="st">"is_uc_property"</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"polygons_hash_city_name"</span>:<span class="st">"city"</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"polygons_hash_housing_region_name"</span>:<span class="st">"housing_region"</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"polygons_hash_state_name"</span>:<span class="st">"state"</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"polygons_hash_sublocality_name"</span>:<span class="st">"sub_locality"</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"price_on_request"</span>:<span class="st">"price_on_request"</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"show_loan_option"</span>:<span class="st">"has_loan"</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"status"</span>:<span class="st">"status"</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"street_info"</span>:<span class="st">"street"</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"title"</span>:<span class="st">"title"</span>,<span class="st">"type"</span>:<span class="st">"sale_type"</span>,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"updated_at"</span>:<span class="st">"updated_on"</span>,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"_id"</span>: <span class="st">"id"</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"display_neighbourhood_0"</span>: <span class="st">"locality"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, I kept the necessary columns and renamed them.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> df[columns.keys()]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> temp.rename(columns<span class="op">=</span>columns).drop_duplicates(<span class="st">'id'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> temp.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(24482, 41)</code></pre>
+<p>We have reduced to 41 columns and 24 thousand properties now.</p>
+<section id="missing-values-in-data" class="level3">
+<h3 class="anchored" data-anchor-id="missing-values-in-data">Missing values in data</h3>
+<p>Parental advisory: if your kid comes home with a data set with a long list of columns, do not let them try the following visualization. It may cause dizziness on empty stomach.</p>
+<p>But, the same viz helps to see the amount of null values that exist in each column.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> pd.DataFrame({col: {<span class="st">'Empty'</span>: temp[temp[col].isnull()].shape[<span class="dv">0</span>], <span class="st">'Total'</span>: temp.shape[<span class="dv">0</span>]} <span class="cf">for</span> col <span class="kw">in</span> temp})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So we made a new data frame, which kept a count of empty cells against non-empty cells. It looked like this:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_temp.T.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
+
+<table class="dataframe table table-sm table-striped">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+Empty
+</th>
+<th>
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+CTR
+</th>
+<td>
+0
+</td>
+<td>
+24482
+</td>
+</tr>
+<tr>
+<th>
+URL
+</th>
+<td>
+0
+</td>
+<td>
+24482
+</td>
+</tr>
+<tr>
+<th>
+appt_type_id
+</th>
+<td>
+0
+</td>
+<td>
+24482
+</td>
+</tr>
+<tr>
+<th>
+area
+</th>
+<td>
+0
+</td>
+<td>
+24482
+</td>
+</tr>
+<tr>
+<th>
+bedrooms
+</th>
+<td>
+0
+</td>
+<td>
+24482
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_temp.<span class="bu">apply</span>(<span class="kw">lambda</span> v: (v.Total <span class="op">-</span> v.Empty)<span class="op">/</span><span class="bu">float</span>(v.Total) <span class="op">*</span> <span class="dv">100</span>).plot(kind<span class="op">=</span><span class="st">'barh'</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2938ff60&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_24_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>From the above visual we gather that, <em>developer_name</em> column is almost empty. Giving it company are, the <em>sub_locality</em>, <em>housing_region</em> and <em>locality</em> columns.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># temp = temp[filter(lambda v: v not in ['sub_locality', 'housing_region', 'locality'], temp.columns)]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's drop "status" from the data because it has only one value</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> temp.status.unique()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"dropping status column from temp"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> temp.drop(<span class="st">'status'</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[u'ACTIVE']
+dropping status column from temp</code></pre>
+</section>
+<section id="what-does-the-distribution-of-listings-across-states-look-like" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-the-distribution-of-listings-across-states-look-like">What does the distribution of listings across states look like ?</h3>
+<p>Maharashtra leads followed by Karnataka and Tamil Nadu.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(y<span class="op">=</span><span class="st">"state"</span>, data<span class="op">=</span>temp, palette<span class="op">=</span><span class="st">"Blues_d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x29111550&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_30_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="and-how-about-the-price-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="and-how-about-the-price-distribution">And how about the price distribution ?</h3>
+<p>Well, in our dataset, Maharashtra seems to be a really pricey state to buy properties in.</p>
+<p>A sizeable chunk of the listings in the state lies between 5-10 crores per piece. No other state seems to come close to Maharashtra’s behaviour.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sns.stripplot(temp[<span class="st">"price"</span>], temp[<span class="st">'state'</span>], order<span class="op">=</span>temp.state.dropna().unique())</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Listing prices across states"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.text.Text at 0x2ea3c128&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_33_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="what-about-the-metro-cities-then" class="level3">
+<h3 class="anchored" data-anchor-id="what-about-the-metro-cities-then">What about the metro cities, then ?</h3>
+<p>A metropolitan area according to the Wikipedia definition is - “The Constitution (seventy-fourth Amendment) Act, 1992 defines a metropolitan area in India as, an area having a population of ten lakhs or more, comprised in one or more districts and consisting of two or more Municipalities or Panchayats or other contiguous areas, specified by the Governor by public notification to be a Metropolitan area.” <a href="https://en.wikipedia.org/wiki/List_of_metropolitan_areas_in_India">Source</a></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>metros <span class="op">=</span> [<span class="st">'New Delhi'</span>,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">'Mumbai'</span>, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="st">'Kolkata'</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">'Bangalore'</span>, </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st">'Pune'</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">'Hyderabad'</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="st">'Chennai'</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">'Surat'</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">'Visakhapatnam'</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="st">'Kanpur'</span>]</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>metro_data <span class="op">=</span> temp[temp.city.isin(metros)]</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>sns.stripplot(metro_data[<span class="st">"price"</span>], metro_data[<span class="st">'city'</span>], order<span class="op">=</span>metro_data.city.dropna().unique())</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Listing prices across metro cities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.text.Text at 0x2e2cfe80&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_36_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>Apparently, Mumbai lags behind New Delhi in prices. Though it would be interesting to track down for Maharashtra’s price lead as a state, but we will take a raincheck on it. Remember, we are house hunting in Delhi because yours-truly resides there.</p>
+<p>housing.com also provides a column called <em>appt_type_id</em>. This may provide insight to the <em>appt_type_id</em> we should be looking at.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sns.stripplot(temp[<span class="st">'appt_type_id'</span>], temp[<span class="st">"price"</span>],  order<span class="op">=</span>temp[<span class="st">'appt_type_id'</span>].dropna().unique())</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"price variation across appartment type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.text.Text at 0x177e3278&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_39_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>Appartment types - 4, 5, 6, 7, 45 - seems to show a broad range of prices than the rest.</p>
+</section>
+<section id="correlations" class="level3">
+<h3 class="anchored" data-anchor-id="correlations">Correlations</h3>
+<p>Some obvious learnings : - More bedrooms usually means more toilets. - Price has an inclination to rise linearly with area. - Area in sq ft though does not rise linearly beyond a certain limit.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'bedrooms'</span>, <span class="st">'area'</span>, <span class="st">'price'</span>, <span class="st">'toilets'</span>]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> temp[features].stack().unstack()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df_temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;seaborn.axisgrid.PairGrid at 0x32e352e8&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_43_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>To bring out the correlations more sharply, let’s create a heatmap</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'bedrooms'</span>, <span class="st">'area'</span>, <span class="st">'price'</span>, <span class="st">'toilets'</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap((temp[features].corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2fc52d68&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_45_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>Alright, so which of the ammenities affect the housing prices much ?</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> temp[[<span class="st">'has_pool'</span>, <span class="st">'has_gated_community'</span>, <span class="st">'has_gas'</span>, <span class="st">u'has_gym'</span>, <span class="st">u'has_lift'</span>, <span class="st">'has_parking'</span>, <span class="st">'has_loan'</span>]].astype(<span class="bu">int</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_temp[<span class="st">'price'</span>] <span class="op">=</span> temp[<span class="st">'price'</span>]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap((df_temp.corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x3047fc50&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_47_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>Wow, it seems price has the most correlation with the availability of gas. I always assumed, having a pool makes things pricier. Let’s see if this holds true for a land-locked city like New Delhi.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> temp[temp.city.isin([<span class="st">'New Delhi'</span>])].fillna(<span class="dv">0</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ammenities <span class="op">=</span> [<span class="st">'has_pool'</span>, <span class="st">'has_gated_community'</span>, <span class="st">'has_gas'</span>, <span class="st">u'has_gym'</span>, <span class="st">u'has_lift'</span>, <span class="st">'has_parking'</span>, <span class="st">'has_loan'</span>, <span class="st">'price'</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> df_temp[ammenities].astype(<span class="bu">int</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap((df_temp.corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>,  fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2fca82b0&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/output_49_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>As we see above, the factors affecting price are the availability of gas, a lift, a parking space and to some extent a gated community.</p>
+<p>After speaking to a half a dozen real estate agents on the ground, I’ve learnt that parking can add few lakhs more to the final price. So it may be that in a larger and more representative data set, availability of a parking space will most likely have a higher correlation than that of a lift.</p>
+</section>
+<section id="the-cheapest-23-bhk-in-new-delhi" class="level3">
+<h3 class="anchored" data-anchor-id="the-cheapest-23-bhk-in-new-delhi">The cheapest 2/3 BHK in New Delhi ?</h3>
+<p>Let’s look at only the 2,3 and 4 bedroom houses in Delhi which are priced at less than 10 million INR and which are greater than 700 sq ft of space. The last filter removes takes us to the less busy and less pricey parts of the city.</p>
+<p><em>Because</em>, this scatterplot that helps you explore this is an interactive chart, it would be best, if you would follow along at this <a href="https://nbviewer.jupyter.org/github/fx86/housing.com/blob/master/housing.ipynb#The-cheapest-2/3-BHK-in-New-Delhi-?">link</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/housing_scatterplot.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>Further : - it would be nice idea to let the user (me) click on a circle to directly open the listing without having to open the browser. Bokeh 0.15 has a bug with JSON parsing, which I need to get to fixing or wait for the 0.16 version. - The street addresses in the data set could give information about banks, ATMs, hospitals and malls, which could be used to further understand the price. - For places with widespread metro services like Delhi, Gurgaon and Noida, distance to the nearest metro station could be a prime deciding factor in price hike.</p>
+<p>We will explore these in the next blog post where we will apply some machine learning to learn more about the data. Till then, happy house hunting to me.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Disqus embed: will insert Disqus thread if meta[disqus-shortname] is present -->
+<div class="comments-section">
+  <h2>Comments</h2>
+  <div id="disqus_thread">
+    <p>Loading comments...</p>
+  </div>
+  <div id="disqus-fallback" style="display:none; margin-top:0.75rem; color:#6b7280; font-size:0.95rem;"></div>
+</div>
+<script>
+  (function(){
+    try {
+      const shortname = document.querySelector('meta[name="disqus-shortname"]')?.getAttribute('content');
+      const fallbackEl = document.getElementById('disqus-fallback');
+      const thread = document.getElementById('disqus_thread');
+
+      if (!shortname) {
+        if (fallbackEl) {
+          fallbackEl.style.display = 'block';
+          fallbackEl.innerHTML = 'Disqus not configured: no <code>disqus-shortname</code> meta tag found. Add your Disqus shortname to <code>_includes/disqus-meta.html</code> and re-render.';
+        }
+        return;
+      }
+
+      if (shortname.indexOf('PLACEHOLDER') !== -1) {
+        if (fallbackEl) {
+          fallbackEl.style.display = 'block';
+          fallbackEl.innerHTML = 'Disqus shortname is a placeholder. Replace the placeholder in <code>_includes/disqus-meta.html</code> with your real shortname.';
+        }
+        return;
+      }
+
+      // Provide page-specific identifiers so threads map correctly
+      window.disqus_config = function () {
+        this.page.url = window.location.protocol + '//' + window.location.host + window.location.pathname; // canonical-ish URL
+        this.page.identifier = window.location.pathname; // use path as identifier
+      };
+
+      var d = document, s = d.createElement('script');
+      s.src = 'https://' + shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      s.async = true;
+      (d.head || d.body).appendChild(s);
+
+      // If embed hasn't loaded in 6s, show troubleshooting hints
+      setTimeout(function(){
+        // Disqus replaces the thread div; if still present, show hints
+        const hasChildren = thread && thread.childElementCount > 0 && thread.querySelector('iframe');
+        if (!hasChildren && fallbackEl) {
+          fallbackEl.style.display = 'block';
+          const host = window.location.host;
+          fallbackEl.innerHTML = `We were unable to load Disqus. Common causes: invalid shortname, Disqus forum not created, or the current host (<strong>${host}</strong>) is not allowed in your Disqus settings. Verify your Disqus shortname in <code>_includes/disqus-meta.html</code> and test on the live site domain (for example: <code>https://fx86.github.io</code>).`;
+        }
+      }, 6000);
+
+    } catch (e) { console.warn('Disqus loader failed', e); }
+  })();
+</script>
+<style>
+/* Reset core container padding */
+#quarto-content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 16rem !important;
+  margin-right: 0 !important;
+}
+
+/* Target the posts */
+.quarto-post {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.comments-section {
+  margin-left: 3rem !important;
+  padding-left: 0 !important;
+}
+</style>
+
+<script>
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the exact position of the navbar title for precise alignment
+  function getExactNavbarPosition() {
+    const navbarTitle = document.querySelector('.navbar-title');
+    const brandContainer = document.querySelector('.navbar-brand-container');
+    
+    if (navbarTitle) {
+      const rect = navbarTitle.getBoundingClientRect();
+      const containerRect = brandContainer.getBoundingClientRect();
+      // Get the precise offset between container edge and text
+      const exactOffset = rect.left - containerRect.left + 'px';
+      console.log('Exact navbar title position:', exactOffset);
+      return rect.left;
+    }
+    return null;
+  }
+  
+  // Apply exact alignment based on navbar title position
+  function applyExactAlignment() {
+    const navPos = getExactNavbarPosition();
+    if (!navPos) return;
+    
+    // Apply to all post content
+    const items = document.querySelectorAll('.quarto-listing .list > *');
+    items.forEach(item => {
+      item.style.paddingLeft = '0';
+      item.style.boxSizing = 'border-box';
+      item.style.marginLeft = navPos + 'px';
+    });
+    
+    // Force thumbnails to align
+    const thumbnails = document.querySelectorAll('.quarto-post .thumbnail');
+    thumbnails.forEach(thumb => {
+      thumb.style.marginLeft = '0';
+      thumb.style.paddingLeft = '0';
+    });
+    
+    // Also apply to the listing container
+    const listingContainer = document.querySelector('#listing-listing');
+    if (listingContainer) {
+      listingContainer.style.paddingLeft = '0';
+      listingContainer.style.marginLeft = navPos + 'px';
+    }
+    
+    console.log('Content aligned precisely with navbar title');
+  }
+  
+  // Run after a short delay to ensure all elements are rendered
+  setTimeout(applyExactAlignment, 100);
+  
+  // Also handle window resize
+  window.addEventListener('resize', function() {
+    setTimeout(applyExactAlignment, 100);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© 2025 Fx86. All rights reserved.</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fx86">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="fibinse">
+<meta name="dcterms.date" content="2019-03-08">
+
+<title>visualist.in - Exploring fbprophet with stock scrips</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-XXXXXXXX-X', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<!-- Load fonts similar to Mickaël Canouil's site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;family=Merriweather:wght@300;400;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --site-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --site-serif: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
+    --accent: #2b6cb0;
+    --muted: #6b7280;
+    --bg: #ffffff;
+  }
+</style>
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-XXXXXXXX-X');
+</script>
+<!-- End Google Analytics -->
+<meta name="disqus-shortname" content="visualist-1">
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">visualist.in</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../archive.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fx86"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/fx86"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Exploring fbprophet with stock scrips</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>fibinse </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 8, 2019</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<form action="https://buttondown.com/api/emails/embed-subscribe/fibinse" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/fibinse', 'popupwindow')" class="embeddable-buttondown-form">
+  <label for="bd-email">Enter your email</label>
+  <input type="email" name="email" id="bd-email">
+  
+  <input type="submit" value="Subscribe">
+  <p>
+    <a href="https://buttondown.com/refer/fibinse" target="_blank">Powered by Buttondown.</a>
+  </p>
+</form>
+</div></div>
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Fbprophet is a time-series forecasting package open-sourced by Facebook in 2017. This is an additive model which provides intuitive input parameters, allowing users with domain knowledge to tweak it with very little statistical knowledge of the internals. Part of the intuitiveness stems because it allows users to specify holidays and changepoints and also use user-added seasonality as input. In this blog post, we are going to exchange some ideas on how to use the package better.</p>
+<p>For training data, we are going to use a stock symbol data traded on the National Stock Exchange (NSE) of India. To ease our access to data, we will be downloading the historical data from <a href="https://in.finance.yahoo.com/quote/TATAMOTORS.BO/history?period1=1407868200&amp;period2=1565634600&amp;interval=1d&amp;filter=history&amp;frequency=1d">Yahoo Finance.</a> It downloads as a CSV file which we can open with Pandas for further examination.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fbprophet <span class="im">import</span> Prophet</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fbprophet.plot <span class="im">import</span> add_changepoints_to_plot</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> holidays</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"TATAMOTORS.BO.csv"</span>, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>])</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+Date
+</th>
+<th>
+Open
+</th>
+<th>
+High
+</th>
+<th>
+Low
+</th>
+<th>
+Close
+</th>
+<th>
+Adj Close
+</th>
+<th>
+Volume
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+1991-01-02
+</td>
+<td>
+20.9601
+</td>
+<td>
+21.8584
+</td>
+<td>
+20.9601
+</td>
+<td>
+21.8584
+</td>
+<td>
+4.024777
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+1991-01-03
+</td>
+<td>
+20.9601
+</td>
+<td>
+21.8584
+</td>
+<td>
+20.9601
+</td>
+<td>
+21.8584
+</td>
+<td>
+4.024777
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+1991-01-04
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+1991-01-07
+</td>
+<td>
+20.3613
+</td>
+<td>
+21.2596
+</td>
+<td>
+20.0618
+</td>
+<td>
+21.1098
+</td>
+<td>
+3.886938
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+1991-01-08
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+<p>Further examination shows us that we have 28 years of daily OHLC (open, high, low, close) data. That’s a lot of data. For our modelling efforts, we will use the closing price of the day (in the <code>Close</code> column). First off, let’s visualise the stock’s movements over the years.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> data.set_index(<span class="st">'Date'</span>)[<span class="st">'Close'</span>].plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_4_0.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>Part of the reason for this stock’s meteoric spike was its purchase of Jaguar &amp; Land Rover brands (JLR) in July 2008. For our purpose, we will use a 5 year period to train and produce a forecast for the upcoming 6 months starting from the last date in the training data. This reduced time window 0f 5 years (than 14 years) will allow us to capture movements in price after the acquisition more closely.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> data.tail(<span class="dv">2000</span>).set_index(<span class="st">'Date'</span>)[<span class="st">'Close'</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.reset_index().rename(columns<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'ds'</span>, <span class="st">'Close'</span>: <span class="st">'y'</span>})</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> df.set_index(<span class="st">'ds'</span>)[<span class="st">'y'</span>].plot(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">7</span>))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>holidays <span class="op">=</span> df[df.y.isnull()]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>holidays <span class="op">=</span> holidays.rename(columns<span class="op">=</span>{<span class="st">'y'</span>: <span class="st">'holiday'</span>}).fillna(<span class="st">'Other'</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>holidays.loc[:, <span class="st">'ds'</span>] <span class="op">=</span> holidays[<span class="st">'ds'</span>].dt.strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># holidays = pd.concat([holidays, pd.read_csv("/Users/fibinse/Downloads/holidays.csv")])</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>holidays.loc[:, <span class="st">'upper_window'</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>holidays.loc[:, <span class="st">'lower_window'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna()</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(2000, 2)
+
+
+
+
+
+(1994, 2)</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_6_2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>The <code>fbprophet</code> model interface is similar to the one provided by <code>sklearn</code>. Before that, we will split the time series that we visualised above into a training and testing set.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">int</span>(df.shape[<span class="dv">0</span>] <span class="op">*</span> <span class="fl">.78</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>train, test <span class="op">=</span> df.iloc[<span class="dv">300</span> :N], df.loc[N: N<span class="op">+</span><span class="dv">200</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>test.loc[:, <span class="st">'ds'</span>] <span class="op">=</span> pd.to_datetime(test.ds)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(train.ds.describe(), <span class="st">'</span><span class="ch">\n\n\n</span><span class="st">'</span>, test.ds.describe())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>count                    1255
+unique                   1255
+top       2016-09-08 00:00:00
+freq                        1
+first     2012-09-20 00:00:00
+last      2017-10-30 00:00:00
+Name: ds, dtype: object 
+
+
+ count                     201
+unique                    201
+top       2017-10-30 00:00:00
+freq                        1
+first     2017-10-23 00:00:00
+last      2018-08-08 00:00:00
+Name: ds, dtype: object</code></pre>
+<p>We have split the data into a training set with 1255 days of data and test set with 200 days of data. Now, we instantiate a model and fit it on the training data.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Prophet()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> model.fit(train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>INFO:fbprophet:Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.</code></pre>
+<p>We will now use fbprophet’s <code>make_future_dataframe</code> function to create a dataframe of future dates, with the same dimension as that of the test dataframe. The <code>include_history</code> makes sure that we strictly get only future dates from the end of the training data set.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>future <span class="op">=</span> model.make_future_dataframe(periods<span class="op">=</span>test.shape[<span class="dv">0</span>], include_history<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>future <span class="op">=</span> model.predict(future)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The predict method creates a rich <code>future</code> dataframe where each date is assigned a prediction (<code>yhat</code>) along with its uncertainty intervals.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> model.plot(future)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_14_0.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>We will use the mean absolute error function to calculate the error in our forecast.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mean_absolute_error(y_true, y_pred): </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    y_true, y_pred <span class="op">=</span> pd.np.array(y_true), pd.np.array(y_pred)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">round</span>(pd.np.mean(pd.np.<span class="bu">abs</span>((y_true <span class="op">-</span> y_pred))), <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MAE in baseline forecast: INR </span><span class="sc">{:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(mean_absolute_error(test[<span class="st">'y'</span>], future[<span class="st">'yhat'</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>MAE in baseline forecast: INR 37.3</code></pre>
+<p>When we initialise a Prophet model, we have a handful of features which we could tune to improve our forecast.</p>
+<ol type="1">
+<li><p><code>growth='linear'| 'logistic'</code> : Since the stock symbol as financial instrument does not really have an upper limit to its value, we will use Prophet’s linear model. If you were to forecast things which can have a saturating growth, like computing capacity in a server or human population in a given area, we could go with the logistic model.</p></li>
+<li><p><code>Changepoints</code>: Prophet accomodates a list of dates as input if we wanted it to keep it from calculating them instead. These dates can be passed via the <code>changepoints</code> attribute. If this attribute is not provided, it then picks <code>n_changepoints</code> from the first <code>changepoint_range</code> range of the data. For example, default values for these are: <code>n_changepoints=25</code> &amp; <code>changepoint_range=0.8</code>, this means that we are asking the model to uniformly sample 25 points from the first 80% of the training data. These should be used to indicate abrupt changes in the behaviour of the time series. In case of stock symbols, it may be a good idea to include the dates at which quarterly results were announced.</p></li>
+<li><p><code>changepoint_prior_scale</code>: controls the model’s flexibility to including changepoints. In my experience, <code>changepoint_prior_scale</code> has been more useful than specifying <code>changepoints</code> dates or specifying the <code>changepoint_range</code>.</p></li>
+<li><p><code>yearly_seasonality</code>, <code>weekly_seasonality</code> and <code>daily_seasonality</code> attributes control the seasonality that the model should capture. The model captures these seasonalities as additive components in the forecast, which sometimes helps in observing if the model has captured the data correctly. I usually turns these off and add seasonal regressors using the <code>add_seasonality</code> feature.</p></li>
+<li><p>We can control how the <code>holidays</code> affect our model by passing a column <code>prior_scale</code> along a dataframe of dates and holiday names. This dataframe can additionally include the range of days around the holiday date as part of the holiday. A row for the Christmas holiday week, could have <code>upper_window=7</code> and <code>lower_window=0</code> which will then include 25th Dec to 2nd Jan as holidays. If we don’t want to specify dates, we could use <code>holidays_prior_scale</code> parameter to control the strength of the holiday component in the model. Its default value is 10.0.</p></li>
+<li><p>The <code>seasonality_mode</code> parameter which defaults to <code>'additive'</code> means that components are added to the trend. From the <a href="https://facebook.github.io/prophet/docs/multiplicative_seasonality.html">official documentation</a>, when “the seasonality is not a constant additive factor as assumed by Prophet, rather it grows with the trend. This is multiplicative seasonality.” and that is when we should set the <code>seasonality_mode=multiplicative</code>. <code>seasonality_prior_scale</code>: Larger values allow the model to fit larger seasonal fluctuations, smaller values dampen the seasonality. Can be specified for individual seasonalities using add_seasonality.”</p></li>
+<li><p><code>interval_width</code> sets the width of the confidence interval around the forecast.</p></li>
+</ol>
+<p>We have gone ahead and disabled all seasonality parameters which appear by default in the model. Additionally, we have increased the <code>changepoint_prior_scale</code> by a small amount (0.02).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Prophet(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                daily_seasonality<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                weekly_seasonality<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                yearly_seasonality<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                changepoint_prior_scale<span class="op">=</span><span class="fl">0.07</span>, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add yearly seasonality</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>model.add_seasonality(<span class="st">'yearly'</span>, period<span class="op">=</span><span class="fl">365.25</span>, fourier_order<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> model.fit(train)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>future <span class="op">=</span> model.make_future_dataframe(periods<span class="op">=</span>test.shape[<span class="dv">0</span>], include_history<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>future <span class="op">=</span> model.predict(future)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># join the actual value with the forecast</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> data.merge(future[[<span class="st">'ds'</span>, <span class="st">'yhat'</span>]], </span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>           left_on<span class="op">=</span><span class="st">'Date'</span>, right_on<span class="op">=</span><span class="st">'ds'</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>           how<span class="op">=</span><span class="st">'left'</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>           ).set_index(<span class="st">'Date'</span>)[[<span class="st">'Close'</span>, <span class="st">'yhat'</span>]].dropna()</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the mean absolute error</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>mae_error <span class="op">=</span> mean_absolute_error(_[<span class="st">'yhat'</span>], _[<span class="st">'Close'</span>])</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mean absolute error: "</span>, <span class="bu">round</span>(mae_error, <span class="dv">1</span>))</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> _.plot(title<span class="op">=</span><span class="st">'Prediction vs Actual'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Mean absolute error:  17.0</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_20_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>There is quite a bit of work to be done to improve the forecast as the plotted components tell us below.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> model.plot_components(future)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_22_0.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>The trend-plot in the first diagram shows an increasingly spreading confidence interval. Beyond a month of forecast, the trend cannot be really trusted. The yearly component also shows the forecasted nature of the stock symbol: it spikes by 15% at the beginning of the year, hits a trough near September where it falls by a bit more than 20% and tries to recover again in November. Do remember, this is again only the forecasted components.</p>
+<p>Once the data has been fitted, we can use <code>add_changepoints_to_plot</code> to plot the dates as red-dotted lines for visual inspection.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot forecast with the actual values</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>axes.set_title(<span class="st">'Observed changepoints. MAE : {:,.0f}'</span>.<span class="bu">format</span>(<span class="bu">round</span>(mae_error)))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> model.plot(future, ax<span class="op">=</span>axes)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot change points that the model has observed</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> add_changepoints_to_plot(axes, model, future)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_25_0.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>Eyeballing it we can see the points where trend has changed. You can also get the complete series of changepoints as a series. If the detected changepoints do not line up as you expect them to be, you can explicitly set them in the <code>changepoints</code> parameter.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model.changepoints.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>40    2012-11-22
+80    2013-01-21
+120   2013-03-18
+160   2013-05-20
+201   2013-07-16
+Name: ds, dtype: datetime64[ns]</code></pre>
+<p>This brings us to the end of this exploration of the fbProphet model. It would be a good idea to further read up on the inbuilt <a href="https://facebook.github.io/prophet/docs/diagnostics.html">cross validation techniques</a> that Prophet provides.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+
+</main> <!-- /main -->
+<!-- Disqus embed: will insert Disqus thread if meta[disqus-shortname] is present -->
+<div class="comments-section">
+  <h2>Comments</h2>
+  <div id="disqus_thread">
+    <p>Loading comments...</p>
+  </div>
+  <div id="disqus-fallback" style="display:none; margin-top:0.75rem; color:#6b7280; font-size:0.95rem;"></div>
+</div>
+<script>
+  (function(){
+    try {
+      const shortname = document.querySelector('meta[name="disqus-shortname"]')?.getAttribute('content');
+      const fallbackEl = document.getElementById('disqus-fallback');
+      const thread = document.getElementById('disqus_thread');
+
+      if (!shortname) {
+        if (fallbackEl) {
+          fallbackEl.style.display = 'block';
+          fallbackEl.innerHTML = 'Disqus not configured: no <code>disqus-shortname</code> meta tag found. Add your Disqus shortname to <code>_includes/disqus-meta.html</code> and re-render.';
+        }
+        return;
+      }
+
+      if (shortname.indexOf('PLACEHOLDER') !== -1) {
+        if (fallbackEl) {
+          fallbackEl.style.display = 'block';
+          fallbackEl.innerHTML = 'Disqus shortname is a placeholder. Replace the placeholder in <code>_includes/disqus-meta.html</code> with your real shortname.';
+        }
+        return;
+      }
+
+      // Provide page-specific identifiers so threads map correctly
+      window.disqus_config = function () {
+        this.page.url = window.location.protocol + '//' + window.location.host + window.location.pathname; // canonical-ish URL
+        this.page.identifier = window.location.pathname; // use path as identifier
+      };
+
+      var d = document, s = d.createElement('script');
+      s.src = 'https://' + shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      s.async = true;
+      (d.head || d.body).appendChild(s);
+
+      // If embed hasn't loaded in 6s, show troubleshooting hints
+      setTimeout(function(){
+        // Disqus replaces the thread div; if still present, show hints
+        const hasChildren = thread && thread.childElementCount > 0 && thread.querySelector('iframe');
+        if (!hasChildren && fallbackEl) {
+          fallbackEl.style.display = 'block';
+          const host = window.location.host;
+          fallbackEl.innerHTML = `We were unable to load Disqus. Common causes: invalid shortname, Disqus forum not created, or the current host (<strong>${host}</strong>) is not allowed in your Disqus settings. Verify your Disqus shortname in <code>_includes/disqus-meta.html</code> and test on the live site domain (for example: <code>https://fx86.github.io</code>).`;
+        }
+      }, 6000);
+
+    } catch (e) { console.warn('Disqus loader failed', e); }
+  })();
+</script>
+<style>
+/* Reset core container padding */
+#quarto-content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 16rem !important;
+  margin-right: 0 !important;
+}
+
+/* Target the posts */
+.quarto-post {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.comments-section {
+  margin-left: 3rem !important;
+  padding-left: 0 !important;
+}
+</style>
+
+<script>
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the exact position of the navbar title for precise alignment
+  function getExactNavbarPosition() {
+    const navbarTitle = document.querySelector('.navbar-title');
+    const brandContainer = document.querySelector('.navbar-brand-container');
+    
+    if (navbarTitle) {
+      const rect = navbarTitle.getBoundingClientRect();
+      const containerRect = brandContainer.getBoundingClientRect();
+      // Get the precise offset between container edge and text
+      const exactOffset = rect.left - containerRect.left + 'px';
+      console.log('Exact navbar title position:', exactOffset);
+      return rect.left;
+    }
+    return null;
+  }
+  
+  // Apply exact alignment based on navbar title position
+  function applyExactAlignment() {
+    const navPos = getExactNavbarPosition();
+    if (!navPos) return;
+    
+    // Apply to all post content
+    const items = document.querySelectorAll('.quarto-listing .list > *');
+    items.forEach(item => {
+      item.style.paddingLeft = '0';
+      item.style.boxSizing = 'border-box';
+      item.style.marginLeft = navPos + 'px';
+    });
+    
+    // Force thumbnails to align
+    const thumbnails = document.querySelectorAll('.quarto-post .thumbnail');
+    thumbnails.forEach(thumb => {
+      thumb.style.marginLeft = '0';
+      thumb.style.paddingLeft = '0';
+    });
+    
+    // Also apply to the listing container
+    const listingContainer = document.querySelector('#listing-listing');
+    if (listingContainer) {
+      listingContainer.style.paddingLeft = '0';
+      listingContainer.style.marginLeft = navPos + 'px';
+    }
+    
+    console.log('Content aligned precisely with navbar title');
+  }
+  
+  // Run after a short delay to ensure all elements are rendered
+  setTimeout(applyExactAlignment, 100);
+  
+  // Also handle window resize
+  window.addEventListener('resize', function() {
+    setTimeout(applyExactAlignment, 100);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© 2025 Fx86. All rights reserved.</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fx86">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

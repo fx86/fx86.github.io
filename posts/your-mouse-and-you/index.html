@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="fibinse">
+<meta name="dcterms.date" content="2015-11-02">
+
+<title>visualist.in - Your mouse and you</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-XXXXXXXX-X', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<!-- Load fonts similar to Mickaël Canouil's site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;family=Merriweather:wght@300;400;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --site-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --site-serif: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
+    --accent: #2b6cb0;
+    --muted: #6b7280;
+    --bg: #ffffff;
+  }
+</style>
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-XXXXXXXX-X');
+</script>
+<!-- End Google Analytics -->
+<meta name="disqus-shortname" content="visualist-1">
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">visualist.in</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../archive.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fx86"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/fx86"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Your mouse and you</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>fibinse </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 2, 2015</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<form action="https://buttondown.com/api/emails/embed-subscribe/fibinse" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/fibinse', 'popupwindow')" class="embeddable-buttondown-form">
+  <label for="bd-email">Enter your email</label>
+  <input type="email" name="email" id="bd-email">
+  
+  <input type="submit" value="Subscribe">
+  <p>
+    <a href="https://buttondown.com/refer/fibinse" target="_blank">Powered by Buttondown.</a>
+  </p>
+</form>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#findings" id="toc-findings" class="nav-link active" data-scroll-target="#findings">Findings</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fx86/fx86.github.io/edit/main/posts/your-mouse-and-you/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fx86/fx86.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<blockquote class="blockquote">
+<p>“The mouse is probably the narrowest straw you could try to suck all of human expression through.” - Joy Mountford (Head of Human Computer Interactions at Apple, 1986-1994)</p>
+</blockquote>
+<p>There is this one thing that has been (albeit very) slowly evolving and getting obsolete at the same time — the mouse. But like most people who work with data, I’m stuck behind a cursor. And therefore curious about how my mouse data looks. And that my friend has gotten us here. So, I put together a piece of code which could gather all the coordinates of the cursor movements that I make; the result of which is here. In a gist, the program gets the latest coordinate, compares to the previous one (if it exists) and stores it if-new.</p>
+<section id="findings" class="level3">
+<h3 class="anchored" data-anchor-id="findings">Findings</h3>
+<p>I ran the script for equal amount of time on a Windows laptop and a Macbook Pro. Though I use them for programming purposes mainly, there was a huge gap between the sizes of the files generated. On a Windows laptop, the file size turned out to be approx. 20MB/day and on the Macbook Pro it was 3MB/day.</p>
+<p>There are two reasons for that, according to my usage -</p>
+<ul>
+<li><p>I use shortcuts on the Mac excessively. More reflexively so, than I’ve ever done on any OS before. (I like the fact that the Preferences menu on all the apps that I use open with the Command+, combination. Yes, I’m a sucker for these things.)</p></li>
+<li><p>also the fact that since the two-finger scrolling on the Apple baby, does not visually move the cursor, scrolling does not add data to the pile. It saves time and patience by not having you drag the cursor to the scrollbar and pull it down (-town), each time. I don’t find using the space-bar to scroll with, smooth enough for my needs.</p></li>
+</ul>
+<p>Now, visualizing this data from the Windows machine actually shows the most active areas of cursor activity and places that I leave my cursor waiting The black circles are places I let my mouse cursor idle; the longer it idles, the bigger they are. You can see the many number of trips to the program-launcher at the bottom of the screen and how the middle-to-right quadrant of the screen is a very busy traffic area. Reason being Windows likes to place apps in this region when they are launched and hence the mouse activity between them.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/mouse_cursor_behaviour.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+</figure>
+</div>
+<p>In total I figured I’ve used my mouse for almost an hour for the four hour period that I had gathered data for. And my wrists had moved my mouse a good 163 meters (assuming, 1 meter ~ 3779 pixels).</p>
+<p>That’s a lot of —</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/images/monkey_and_mouse.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">gif</figcaption><p></p>
+</figure>
+</div>
+<p>Keyboard shortcuts, anyone ?</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<!-- Disqus embed: will insert Disqus thread if meta[disqus-shortname] is present -->
+<div class="comments-section">
+  <h2>Comments</h2>
+  <div id="disqus_thread">
+    <p>Loading comments...</p>
+  </div>
+  <div id="disqus-fallback" style="display:none; margin-top:0.75rem; color:#6b7280; font-size:0.95rem;"></div>
+</div>
+<script>
+  (function(){
+    try {
+      const shortname = document.querySelector('meta[name="disqus-shortname"]')?.getAttribute('content');
+      const fallbackEl = document.getElementById('disqus-fallback');
+      const thread = document.getElementById('disqus_thread');
+
+      if (!shortname) {
+        if (fallbackEl) {
+          fallbackEl.style.display = 'block';
+          fallbackEl.innerHTML = 'Disqus not configured: no <code>disqus-shortname</code> meta tag found. Add your Disqus shortname to <code>_includes/disqus-meta.html</code> and re-render.';
+        }
+        return;
+      }
+
+      if (shortname.indexOf('PLACEHOLDER') !== -1) {
+        if (fallbackEl) {
+          fallbackEl.style.display = 'block';
+          fallbackEl.innerHTML = 'Disqus shortname is a placeholder. Replace the placeholder in <code>_includes/disqus-meta.html</code> with your real shortname.';
+        }
+        return;
+      }
+
+      // Provide page-specific identifiers so threads map correctly
+      window.disqus_config = function () {
+        this.page.url = window.location.protocol + '//' + window.location.host + window.location.pathname; // canonical-ish URL
+        this.page.identifier = window.location.pathname; // use path as identifier
+      };
+
+      var d = document, s = d.createElement('script');
+      s.src = 'https://' + shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      s.async = true;
+      (d.head || d.body).appendChild(s);
+
+      // If embed hasn't loaded in 6s, show troubleshooting hints
+      setTimeout(function(){
+        // Disqus replaces the thread div; if still present, show hints
+        const hasChildren = thread && thread.childElementCount > 0 && thread.querySelector('iframe');
+        if (!hasChildren && fallbackEl) {
+          fallbackEl.style.display = 'block';
+          const host = window.location.host;
+          fallbackEl.innerHTML = `We were unable to load Disqus. Common causes: invalid shortname, Disqus forum not created, or the current host (<strong>${host}</strong>) is not allowed in your Disqus settings. Verify your Disqus shortname in <code>_includes/disqus-meta.html</code> and test on the live site domain (for example: <code>https://fx86.github.io</code>).`;
+        }
+      }, 6000);
+
+    } catch (e) { console.warn('Disqus loader failed', e); }
+  })();
+</script>
+<style>
+/* Reset core container padding */
+#quarto-content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 16rem !important;
+  margin-right: 0 !important;
+}
+
+/* Target the posts */
+.quarto-post {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.comments-section {
+  margin-left: 3rem !important;
+  padding-left: 0 !important;
+}
+</style>
+
+<script>
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the exact position of the navbar title for precise alignment
+  function getExactNavbarPosition() {
+    const navbarTitle = document.querySelector('.navbar-title');
+    const brandContainer = document.querySelector('.navbar-brand-container');
+    
+    if (navbarTitle) {
+      const rect = navbarTitle.getBoundingClientRect();
+      const containerRect = brandContainer.getBoundingClientRect();
+      // Get the precise offset between container edge and text
+      const exactOffset = rect.left - containerRect.left + 'px';
+      console.log('Exact navbar title position:', exactOffset);
+      return rect.left;
+    }
+    return null;
+  }
+  
+  // Apply exact alignment based on navbar title position
+  function applyExactAlignment() {
+    const navPos = getExactNavbarPosition();
+    if (!navPos) return;
+    
+    // Apply to all post content
+    const items = document.querySelectorAll('.quarto-listing .list > *');
+    items.forEach(item => {
+      item.style.paddingLeft = '0';
+      item.style.boxSizing = 'border-box';
+      item.style.marginLeft = navPos + 'px';
+    });
+    
+    // Force thumbnails to align
+    const thumbnails = document.querySelectorAll('.quarto-post .thumbnail');
+    thumbnails.forEach(thumb => {
+      thumb.style.marginLeft = '0';
+      thumb.style.paddingLeft = '0';
+    });
+    
+    // Also apply to the listing container
+    const listingContainer = document.querySelector('#listing-listing');
+    if (listingContainer) {
+      listingContainer.style.paddingLeft = '0';
+      listingContainer.style.marginLeft = navPos + 'px';
+    }
+    
+    console.log('Content aligned precisely with navbar title');
+  }
+  
+  // Run after a short delay to ensure all elements are rendered
+  setTimeout(applyExactAlignment, 100);
+  
+  // Also handle window resize
+  window.addEventListener('resize', function() {
+    setTimeout(applyExactAlignment, 100);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© 2025 Fx86. All rights reserved.</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fx86">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
