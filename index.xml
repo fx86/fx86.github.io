@@ -6,40 +6,72 @@
       version="2.0">
 <channel>
 <title>visualist.in</title>
-<link>https://fx86.github.io/index.html</link>
+<link>https://fx86.github.io/</link>
 <atom:link href="https://fx86.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description>Personal blog about technology, data science, and more</description>
 <image>
 <url>https://fx86.github.io/profile.jpg</url>
 <title>visualist.in</title>
-<link>https://fx86.github.io/index.html</link>
+<link>https://fx86.github.io/</link>
 </image>
-<generator>quarto-1.2.313</generator>
-<lastBuildDate>Thu, 07 Mar 2019 18:30:00 GMT</lastBuildDate>
+<generator>quarto-1.7.34</generator>
+<lastBuildDate>Fri, 08 Mar 2019 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Exploring fbprophet with stock scrips</title>
-  <dc:creator>fibinse</dc:creator>
-  <link>https://fx86.github.io/posts/exploring-fbprophet-with-stock-scrips/index.html</link>
+  <dc:creator>fibinse </dc:creator>
+  <link>https://fx86.github.io/posts/exploring-fbprophet-with-stock-scrips/</link>
   <description><![CDATA[ 
+
 
 
 
 
 <p>Fbprophet is a time-series forecasting package open-sourced by Facebook in 2017. This is an additive model which provides intuitive input parameters, allowing users with domain knowledge to tweak it with very little statistical knowledge of the internals. Part of the intuitiveness stems because it allows users to specify holidays and changepoints and also use user-added seasonality as input. In this blog post, we are going to exchange some ideas on how to use the package better.</p>
 <p>For training data, we are going to use a stock symbol data traded on the National Stock Exchange (NSE) of India. To ease our access to data, we will be downloading the historical data from <a href="https://in.finance.yahoo.com/quote/TATAMOTORS.BO/history?period1=1407868200&amp;period2=1565634600&amp;interval=1d&amp;filter=history&amp;frequency=1d">Yahoo Finance.</a> It downloads as a CSV file which we can open with Pandas for further examination.</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;">import</span> pandas <span class="im" style="color: #00769E;">as</span> pd</span>
-<span id="cb1-2"><span class="im" style="color: #00769E;">from</span> fbprophet <span class="im" style="color: #00769E;">import</span> Prophet</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;">from</span> fbprophet.plot <span class="im" style="color: #00769E;">import</span> add_changepoints_to_plot</span>
-<span id="cb1-4"><span class="im" style="color: #00769E;">from</span> matplotlib <span class="im" style="color: #00769E;">import</span> pyplot <span class="im" style="color: #00769E;">as</span> plt</span>
-<span id="cb1-5"><span class="im" style="color: #00769E;">import</span> holidays</span>
-<span id="cb1-6"><span class="im" style="color: #00769E;">import</span> warnings</span>
-<span id="cb1-7">warnings.simplefilter(<span class="st" style="color: #20794D;">'ignore'</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">data <span class="op" style="color: #5E5E5E;">=</span> pd.read_csv(<span class="st" style="color: #20794D;">"TATAMOTORS.BO.csv"</span>, parse_dates<span class="op" style="color: #5E5E5E;">=</span>[<span class="st" style="color: #20794D;">'Date'</span>])</span>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> fbprophet <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Prophet</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> fbprophet.plot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> add_changepoints_to_plot</span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> matplotlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-5"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> holidays</span>
+<span id="cb1-6"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> warnings</span>
+<span id="cb1-7">warnings.simplefilter(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ignore'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TATAMOTORS.BO.csv"</span>, parse_dates<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Date'</span>])</span>
 <span id="cb2-2">data.head()</span></code></pre></div>
 <div>
 
-
-<table class="dataframe table table-sm table-striped">
+<table class="dataframe table table-sm table-striped small">
 <thead>
 <tr>
 <th>
@@ -199,31 +231,110 @@ NaN
 </td>
 </tr>
 </tbody>
-
 </table>
 </div>
 <p>Further examination shows us that we have 28 years of daily OHLC (open, high, low, close) data. That’s a lot of data. For our modelling efforts, we will use the closing price of the day (in the <code>Close</code> column). First off, let’s visualise the stock’s movements over the years.</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">_ <span class="op" style="color: #5E5E5E;">=</span> data.set_index(<span class="st" style="color: #20794D;">'Date'</span>)[<span class="st" style="color: #20794D;">'Close'</span>].plot()</span></code></pre></div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data.set_index(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Date'</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Close'</span>].plot()</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_4_0.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>Part of the reason for this stock’s meteoric spike was its purchase of Jaguar &amp; Land Rover brands (JLR) in July 2008. For our purpose, we will use a 5 year period to train and produce a forecast for the upcoming 6 months starting from the last date in the training data. This reduced time window 0f 5 years (than 14 years) will allow us to capture movements in price after the acquisition more closely.</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">df <span class="op" style="color: #5E5E5E;">=</span> data.tail(<span class="dv" style="color: #AD0000;">2000</span>).set_index(<span class="st" style="color: #20794D;">'Date'</span>)[<span class="st" style="color: #20794D;">'Close'</span>]</span>
-<span id="cb4-2">df <span class="op" style="color: #5E5E5E;">=</span> df.reset_index().rename(columns<span class="op" style="color: #5E5E5E;">=</span>{<span class="st" style="color: #20794D;">'Date'</span>: <span class="st" style="color: #20794D;">'ds'</span>, <span class="st" style="color: #20794D;">'Close'</span>: <span class="st" style="color: #20794D;">'y'</span>})</span>
-<span id="cb4-3">_ <span class="op" style="color: #5E5E5E;">=</span> df.set_index(<span class="st" style="color: #20794D;">'ds'</span>)[<span class="st" style="color: #20794D;">'y'</span>].plot(figsize<span class="op" style="color: #5E5E5E;">=</span>(<span class="dv" style="color: #AD0000;">12</span>, <span class="dv" style="color: #AD0000;">7</span>))</span>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data.tail(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2000</span>).set_index(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Date'</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Close'</span>]</span>
+<span id="cb4-2">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.reset_index().rename(columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Date'</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ds'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Close'</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'y'</span>})</span>
+<span id="cb4-3">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.set_index(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ds'</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'y'</span>].plot(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>))</span>
 <span id="cb4-4"></span>
-<span id="cb4-5">holidays <span class="op" style="color: #5E5E5E;">=</span> df[df.y.isnull()]</span>
-<span id="cb4-6">holidays <span class="op" style="color: #5E5E5E;">=</span> holidays.rename(columns<span class="op" style="color: #5E5E5E;">=</span>{<span class="st" style="color: #20794D;">'y'</span>: <span class="st" style="color: #20794D;">'holiday'</span>}).fillna(<span class="st" style="color: #20794D;">'Other'</span>)</span>
-<span id="cb4-7">holidays.loc[:, <span class="st" style="color: #20794D;">'ds'</span>] <span class="op" style="color: #5E5E5E;">=</span> holidays[<span class="st" style="color: #20794D;">'ds'</span>].dt.strftime(<span class="st" style="color: #20794D;">'%Y-%m-</span><span class="sc" style="color: #5E5E5E;">%d</span><span class="st" style="color: #20794D;">'</span>)</span>
-<span id="cb4-8"><span class="co" style="color: #5E5E5E;"># holidays = pd.concat([holidays, pd.read_csv("/Users/fibinse/Downloads/holidays.csv")])</span></span>
-<span id="cb4-9">holidays.loc[:, <span class="st" style="color: #20794D;">'upper_window'</span>] <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">1</span></span>
-<span id="cb4-10">holidays.loc[:, <span class="st" style="color: #20794D;">'lower_window'</span>] <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">0</span></span>
+<span id="cb4-5">holidays <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df[df.y.isnull()]</span>
+<span id="cb4-6">holidays <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> holidays.rename(columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'y'</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'holiday'</span>}).fillna(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Other'</span>)</span>
+<span id="cb4-7">holidays.loc[:, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ds'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> holidays[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ds'</span>].dt.strftime(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'%Y-%m-</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%d</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>)</span>
+<span id="cb4-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># holidays = pd.concat([holidays, pd.read_csv("/Users/fibinse/Downloads/holidays.csv")])</span></span>
+<span id="cb4-9">holidays.loc[:, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'upper_window'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb4-10">holidays.loc[:, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'lower_window'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
 <span id="cb4-11"></span>
-<span id="cb4-12"><span class="bu" style="color: null;">print</span>(df.shape)</span>
-<span id="cb4-13">df <span class="op" style="color: #5E5E5E;">=</span> df.dropna()</span>
+<span id="cb4-12"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(df.shape)</span>
+<span id="cb4-13">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.dropna()</span>
 <span id="cb4-14">df.shape</span></code></pre></div>
 <pre><code>(2000, 2)
 
@@ -235,14 +346,44 @@ NaN
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_6_2.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>The <code>fbprophet</code> model interface is similar to the one provided by <code>sklearn</code>. Before that, we will split the time series that we visualised above into a training and testing set.</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">N <span class="op" style="color: #5E5E5E;">=</span> <span class="bu" style="color: null;">int</span>(df.shape[<span class="dv" style="color: #AD0000;">0</span>] <span class="op" style="color: #5E5E5E;">*</span> <span class="fl" style="color: #AD0000;">.78</span>)</span>
-<span id="cb6-2">train, test <span class="op" style="color: #5E5E5E;">=</span> df.iloc[<span class="dv" style="color: #AD0000;">300</span> :N], df.loc[N: N<span class="op" style="color: #5E5E5E;">+</span><span class="dv" style="color: #AD0000;">200</span>]</span>
-<span id="cb6-3">test.loc[:, <span class="st" style="color: #20794D;">'ds'</span>] <span class="op" style="color: #5E5E5E;">=</span> pd.to_datetime(test.ds)</span>
-<span id="cb6-4"><span class="bu" style="color: null;">print</span>(train.ds.describe(), <span class="st" style="color: #20794D;">'</span><span class="ch" style="color: #20794D;">\n\n\n</span><span class="st" style="color: #20794D;">'</span>, test.ds.describe())</span></code></pre></div>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">N <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(df.shape[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">.78</span>)</span>
+<span id="cb6-2">train, test <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.iloc[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">300</span> :N], df.loc[N: N<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>]</span>
+<span id="cb6-3">test.loc[:, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ds'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.to_datetime(test.ds)</span>
+<span id="cb6-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(train.ds.describe(), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n\n\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>, test.ds.describe())</span></code></pre></div>
 <pre><code>count                    1255
 unique                   1255
 top       2016-09-08 00:00:00
@@ -260,25 +401,73 @@ first     2017-10-23 00:00:00
 last      2018-08-08 00:00:00
 Name: ds, dtype: object</code></pre>
 <p>We have split the data into a training set with 1255 days of data and test set with 200 days of data. Now, we instantiate a model and fit it on the training data.</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">model <span class="op" style="color: #5E5E5E;">=</span> Prophet()</span>
-<span id="cb8-2">_ <span class="op" style="color: #5E5E5E;">=</span> model.fit(train)</span></code></pre></div>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Prophet()</span>
+<span id="cb8-2">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.fit(train)</span></code></pre></div>
 <pre><code>INFO:fbprophet:Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.</code></pre>
 <p>We will now use fbprophet’s <code>make_future_dataframe</code> function to create a dataframe of future dates, with the same dimension as that of the test dataframe. The <code>include_history</code> makes sure that we strictly get only future dates from the end of the training data set.</p>
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">future <span class="op" style="color: #5E5E5E;">=</span> model.make_future_dataframe(periods<span class="op" style="color: #5E5E5E;">=</span>test.shape[<span class="dv" style="color: #AD0000;">0</span>], include_history<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">False</span>)</span>
-<span id="cb10-2">future <span class="op" style="color: #5E5E5E;">=</span> model.predict(future)</span></code></pre></div>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">future <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.make_future_dataframe(periods<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>test.shape[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], include_history<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span>
+<span id="cb10-2">future <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.predict(future)</span></code></pre></div>
 <p>The predict method creates a rich <code>future</code> dataframe where each date is assigned a prediction (<code>yhat</code>) along with its uncertainty intervals.</p>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">_ <span class="op" style="color: #5E5E5E;">=</span> model.plot(future)</span></code></pre></div>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.plot(future)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_14_0.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>We will use the mean absolute error function to calculate the error in our forecast.</p>
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="kw" style="color: #003B4F;">def</span> mean_absolute_error(y_true, y_pred): </span>
-<span id="cb12-2">    y_true, y_pred <span class="op" style="color: #5E5E5E;">=</span> pd.np.array(y_true), pd.np.array(y_pred)</span>
-<span id="cb12-3">    <span class="cf" style="color: #003B4F;">return</span> <span class="bu" style="color: null;">round</span>(pd.np.mean(pd.np.<span class="bu" style="color: null;">abs</span>((y_true <span class="op" style="color: #5E5E5E;">-</span> y_pred))), <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="bu" style="color: null;">print</span>(<span class="st" style="color: #20794D;">"MAE in baseline forecast: INR </span><span class="sc" style="color: #5E5E5E;">{:.1f}</span><span class="st" style="color: #20794D;">"</span>.<span class="bu" style="color: null;">format</span>(mean_absolute_error(test[<span class="st" style="color: #20794D;">'y'</span>], future[<span class="st" style="color: #20794D;">'yhat'</span>])))</span></code></pre></div>
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> mean_absolute_error(y_true, y_pred): </span>
+<span id="cb12-2">    y_true, y_pred <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.np.array(y_true), pd.np.array(y_pred)</span>
+<span id="cb12-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(pd.np.mean(pd.np.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">abs</span>((y_true <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> y_pred))), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"MAE in baseline forecast: INR </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{:.1f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(mean_absolute_error(test[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'y'</span>], future[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yhat'</span>])))</span></code></pre></div>
 <pre><code>MAE in baseline forecast: INR 37.3</code></pre>
 <p>When we initialise a Prophet model, we have a handful of features which we could tune to improve our forecast.</p>
 <ol type="1">
@@ -291,58 +480,184 @@ Name: ds, dtype: object</code></pre>
 <li><p><code>interval_width</code> sets the width of the confidence interval around the forecast.</p></li>
 </ol>
 <p>We have gone ahead and disabled all seasonality parameters which appear by default in the model. Additionally, we have increased the <code>changepoint_prior_scale</code> by a small amount (0.02).</p>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">model <span class="op" style="color: #5E5E5E;">=</span> Prophet(</span>
-<span id="cb15-2">                daily_seasonality<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">False</span>,</span>
-<span id="cb15-3">                weekly_seasonality<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">False</span>,</span>
-<span id="cb15-4">                yearly_seasonality<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">False</span>,</span>
-<span id="cb15-5">                changepoint_prior_scale<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">0.07</span>, </span>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Prophet(</span>
+<span id="cb15-2">                daily_seasonality<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>,</span>
+<span id="cb15-3">                weekly_seasonality<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>,</span>
+<span id="cb15-4">                yearly_seasonality<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>,</span>
+<span id="cb15-5">                changepoint_prior_scale<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.07</span>, </span>
 <span id="cb15-6">                )</span>
-<span id="cb15-7"><span class="co" style="color: #5E5E5E;"># add yearly seasonality</span></span>
-<span id="cb15-8">model.add_seasonality(<span class="st" style="color: #20794D;">'yearly'</span>, period<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">365.25</span>, fourier_order<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">10</span>)</span>
-<span id="cb15-9">_ <span class="op" style="color: #5E5E5E;">=</span> model.fit(train)</span>
+<span id="cb15-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># add yearly seasonality</span></span>
+<span id="cb15-8">model.add_seasonality(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yearly'</span>, period<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365.25</span>, fourier_order<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span>
+<span id="cb15-9">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.fit(train)</span>
 <span id="cb15-10"></span>
-<span id="cb15-11">future <span class="op" style="color: #5E5E5E;">=</span> model.make_future_dataframe(periods<span class="op" style="color: #5E5E5E;">=</span>test.shape[<span class="dv" style="color: #AD0000;">0</span>], include_history<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">False</span>)</span>
-<span id="cb15-12">future <span class="op" style="color: #5E5E5E;">=</span> model.predict(future)</span>
+<span id="cb15-11">future <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.make_future_dataframe(periods<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>test.shape[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], include_history<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span>
+<span id="cb15-12">future <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.predict(future)</span>
 <span id="cb15-13"></span>
-<span id="cb15-14"><span class="co" style="color: #5E5E5E;"># join the actual value with the forecast</span></span>
-<span id="cb15-15">_ <span class="op" style="color: #5E5E5E;">=</span> data.merge(future[[<span class="st" style="color: #20794D;">'ds'</span>, <span class="st" style="color: #20794D;">'yhat'</span>]], </span>
-<span id="cb15-16">           left_on<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'Date'</span>, right_on<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'ds'</span>,</span>
-<span id="cb15-17">           how<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'left'</span></span>
-<span id="cb15-18">           ).set_index(<span class="st" style="color: #20794D;">'Date'</span>)[[<span class="st" style="color: #20794D;">'Close'</span>, <span class="st" style="color: #20794D;">'yhat'</span>]].dropna()</span>
+<span id="cb15-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># join the actual value with the forecast</span></span>
+<span id="cb15-15">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data.merge(future[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ds'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yhat'</span>]], </span>
+<span id="cb15-16">           left_on<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Date'</span>, right_on<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ds'</span>,</span>
+<span id="cb15-17">           how<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'left'</span></span>
+<span id="cb15-18">           ).set_index(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Date'</span>)[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Close'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yhat'</span>]].dropna()</span>
 <span id="cb15-19"></span>
-<span id="cb15-20"><span class="co" style="color: #5E5E5E;"># calculate the mean absolute error</span></span>
-<span id="cb15-21">mae_error <span class="op" style="color: #5E5E5E;">=</span> mean_absolute_error(_[<span class="st" style="color: #20794D;">'yhat'</span>], _[<span class="st" style="color: #20794D;">'Close'</span>])</span>
-<span id="cb15-22"><span class="bu" style="color: null;">print</span>(<span class="st" style="color: #20794D;">"Mean absolute error: "</span>, <span class="bu" style="color: null;">round</span>(mae_error, <span class="dv" style="color: #AD0000;">1</span>))</span>
-<span id="cb15-23">_ <span class="op" style="color: #5E5E5E;">=</span> _.plot(title<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'Prediction vs Actual'</span>)</span></code></pre></div>
+<span id="cb15-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># calculate the mean absolute error</span></span>
+<span id="cb15-21">mae_error <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> mean_absolute_error(_[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yhat'</span>], _[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Close'</span>])</span>
+<span id="cb15-22"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Mean absolute error: "</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(mae_error, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb15-23">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> _.plot(title<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Prediction vs Actual'</span>)</span></code></pre></div>
 <pre><code>Mean absolute error:  17.0</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_20_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>There is quite a bit of work to be done to improve the forecast as the plotted components tell us below.</p>
-<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">_ <span class="op" style="color: #5E5E5E;">=</span> model.plot_components(future)</span></code></pre></div>
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.plot_components(future)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_22_0.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>The trend-plot in the first diagram shows an increasingly spreading confidence interval. Beyond a month of forecast, the trend cannot be really trusted. The yearly component also shows the forecasted nature of the stock symbol: it spikes by 15% at the beginning of the year, hits a trough near September where it falls by a bit more than 20% and tries to recover again in November. Do remember, this is again only the forecasted components.</p>
 <p>Once the data has been fitted, we can use <code>add_changepoints_to_plot</code> to plot the dates as red-dotted lines for visual inspection.</p>
-<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">fig, axes <span class="op" style="color: #5E5E5E;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">1</span>, figsize<span class="op" style="color: #5E5E5E;">=</span>(<span class="dv" style="color: #AD0000;">8</span>, <span class="dv" style="color: #AD0000;">5</span>))</span>
+<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">fig, axes <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>))</span>
 <span id="cb18-2"></span>
-<span id="cb18-3"><span class="co" style="color: #5E5E5E;"># plot forecast with the actual values</span></span>
-<span id="cb18-4">axes.set_title(<span class="st" style="color: #20794D;">'Observed changepoints. MAE : {:,.0f}'</span>.<span class="bu" style="color: null;">format</span>(<span class="bu" style="color: null;">round</span>(mae_error)))</span>
-<span id="cb18-5">_ <span class="op" style="color: #5E5E5E;">=</span> model.plot(future, ax<span class="op" style="color: #5E5E5E;">=</span>axes)</span>
+<span id="cb18-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># plot forecast with the actual values</span></span>
+<span id="cb18-4">axes.set_title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Observed changepoints. MAE : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{:,.0f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(mae_error)))</span>
+<span id="cb18-5">_ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.plot(future, ax<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>axes)</span>
 <span id="cb18-6"></span>
-<span id="cb18-7"><span class="co" style="color: #5E5E5E;"># plot change points that the model has observed</span></span>
-<span id="cb18-8">a <span class="op" style="color: #5E5E5E;">=</span> add_changepoints_to_plot(axes, model, future)</span></code></pre></div>
+<span id="cb18-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># plot change points that the model has observed</span></span>
+<span id="cb18-8">a <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> add_changepoints_to_plot(axes, model, future)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring fbprophet on stock scrips_25_0.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>Eyeballing it we can see the points where trend has changed. You can also get the complete series of changepoints as a series. If the detected changepoints do not line up as you expect them to be, you can explicitly set them in the <code>changepoints</code> parameter.</p>
@@ -359,15 +674,15 @@ Name: ds, dtype: datetime64[ns]</code></pre>
 
 
  ]]></description>
-  <guid>https://fx86.github.io/posts/exploring-fbprophet-with-stock-scrips/index.html</guid>
-  <pubDate>Thu, 07 Mar 2019 18:30:00 GMT</pubDate>
-  <media:content url="https://fx86.github.io/assets/images/Exploring_fbprophet_on_stock_scrips_files/Exploring%20fbprophet%20on%20stock%20scrips_4_0.png" medium="image" type="image/png"/>
+  <guid>https://fx86.github.io/posts/exploring-fbprophet-with-stock-scrips/</guid>
+  <pubDate>Fri, 08 Mar 2019 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>A checklist for debugging cronjobs</title>
-  <dc:creator>fibinse</dc:creator>
-  <link>https://fx86.github.io/posts/a-checklist-for-debugging-cronjobs/index.html</link>
+  <dc:creator>fibinse </dc:creator>
+  <link>https://fx86.github.io/posts/a-checklist-for-debugging-cronjobs/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -391,14 +706,15 @@ Name: ds, dtype: datetime64[ns]</code></pre>
 
 
  ]]></description>
-  <guid>https://fx86.github.io/posts/a-checklist-for-debugging-cronjobs/index.html</guid>
-  <pubDate>Wed, 07 Mar 2018 18:30:00 GMT</pubDate>
+  <guid>https://fx86.github.io/posts/a-checklist-for-debugging-cronjobs/</guid>
+  <pubDate>Thu, 08 Mar 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>House hunting with data</title>
-  <dc:creator>fibinse</dc:creator>
-  <link>https://fx86.github.io/posts/house-hunting-with-data/index.html</link>
+  <dc:creator>fibinse </dc:creator>
+  <link>https://fx86.github.io/posts/house-hunting-with-data/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -410,7 +726,7 @@ Name: ds, dtype: datetime64[ns]</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/housing-maps.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">old is gold</figcaption><p></p>
+<figcaption>old is gold</figcaption>
 </figure>
 </div>
 <section id="scraping-it" class="level2">
@@ -419,7 +735,7 @@ Name: ds, dtype: datetime64[ns]</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/chrome_console.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">view of the console</figcaption><p></p>
+<figcaption>view of the console</figcaption>
 </figure>
 </div>
 <p>And, this is all you need. The readable naming convention seems to hint that it’s their recommendation API. I tried a few combinations and settled down with a <em>limit=50</em>. What happened next was pretty simple as you must have guessed - you query this API for a <em>flat_id</em> and it would return a JSON response containing a few other flat IDs. You save this data somewhere and repeat the process with each of the new <em>flat_ids</em>. And, alas, you have a scraper.</p>
@@ -430,76 +746,325 @@ Name: ds, dtype: datetime64[ns]</code></pre>
 <h2 class="anchored" data-anchor-id="can-you-smell-all-that-data">Can you smell all that data ?!</h2>
 <p>New Year 2017 resolution: When you have data lying around, visualize it!</p>
 <p>And, so we went. I was happy with Pandas and its plotting extensions with a smattering of Seaborn colors schemes and aesthetics for the most part of it.</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;"># The following are my default imports</span></span>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># The following are my default imports</span></span>
 <span id="cb1-2"></span>
-<span id="cb1-3"><span class="im" style="color: #00769E;">import</span> pandas <span class="im" style="color: #00769E;">as</span> pd</span>
-<span id="cb1-4"><span class="im" style="color: #00769E;">import</span> seaborn <span class="im" style="color: #00769E;">as</span> sns</span>
-<span id="cb1-5"><span class="im" style="color: #00769E;">from</span> matplotlib <span class="im" style="color: #00769E;">import</span> pyplot <span class="im" style="color: #00769E;">as</span> plt</span>
-<span id="cb1-6"><span class="im" style="color: #00769E;">import</span> numpy <span class="im" style="color: #00769E;">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">pd.options.display.mpl_style <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">False</span></span></code></pre></div>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="op" style="color: #5E5E5E;">%</span>matplotlib inline</span>
-<span id="cb3-2">sns.<span class="bu" style="color: null;">set</span>(style<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"whitegrid"</span>, color_codes<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">True</span>)</span>
-<span id="cb3-3">sns.<span class="bu" style="color: null;">set</span>(font_scale<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">1</span>)</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sns</span>
+<span id="cb1-5"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> matplotlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-6"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">pd.options.display.mpl_style <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span></span></code></pre></div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span>matplotlib inline</span>
+<span id="cb3-2">sns.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span>(style<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"whitegrid"</span>, color_codes<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb3-3">sns.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span>(font_scale<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
 <span id="cb3-4"></span>
-<span id="cb3-5"><span class="co" style="color: #5E5E5E;"># I wanted to be able to read the long addresses so I increased the column width</span></span>
-<span id="cb3-6">pd.set_option(<span class="st" style="color: #20794D;">'display.max_colwidth'</span>, <span class="dv" style="color: #AD0000;">1000</span>)</span></code></pre></div>
+<span id="cb3-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># I wanted to be able to read the long addresses so I increased the column width</span></span>
+<span id="cb3-6">pd.set_option(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'display.max_colwidth'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>)</span></code></pre></div>
 <p>Now, that I had imported all the packages that I needed to begin with, I did what all of you would do, with the data.</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">df <span class="op" style="color: #5E5E5E;">=</span> pd.read_csv(<span class="st" style="color: #20794D;">"housing.csv"</span>, encoding<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"utf-8"</span>)</span>
-<span id="cb4-2"><span class="bu" style="color: null;">print</span> df.shape</span></code></pre></div>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"housing.csv"</span>, encoding<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"utf-8"</span>)</span>
+<span id="cb4-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span> df.shape</span></code></pre></div>
 <pre><code>(58551, 227)</code></pre>
 <p>The data set initially was 58 thousand rows long and 227 columns wide. This was because there was a lot of overlap; thanks in-part to the nested JSON structure and save duplicates listings.</p>
 <p>While the script was humming along, I had pretty-printed it and found some columns of interest.</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">columns <span class="op" style="color: #5E5E5E;">=</span> {<span class="st" style="color: #20794D;">"completion_date"</span>:<span class="st" style="color: #20794D;">"completed_on"</span>,<span class="st" style="color: #20794D;">"ctr"</span>:<span class="st" style="color: #20794D;">"CTR"</span>,</span>
-<span id="cb6-2">        <span class="st" style="color: #20794D;">"date_added"</span>:<span class="st" style="color: #20794D;">"date_added"</span>,<span class="st" style="color: #20794D;">"date_added_in_seconds"</span>:<span class="st" style="color: #20794D;">"listing_date_seconds"</span>,</span>
-<span id="cb6-3">        <span class="st" style="color: #20794D;">"developer_name"</span>:<span class="st" style="color: #20794D;">"developer_name"</span>,<span class="st" style="color: #20794D;">"featured_type"</span>:<span class="st" style="color: #20794D;">"featured_type"</span>,</span>
-<span id="cb6-4">        <span class="st" style="color: #20794D;">"impressions"</span>:<span class="st" style="color: #20794D;">"impressions"</span>,<span class="st" style="color: #20794D;">"inventory_amenities_has_gas_pipeline"</span>:<span class="st" style="color: #20794D;">"has_gas"</span>,</span>
-<span id="cb6-5">        <span class="st" style="color: #20794D;">"inventory_amenities_has_gym"</span>:<span class="st" style="color: #20794D;">"has_gym"</span>,<span class="st" style="color: #20794D;">"inventory_amenities_has_lift"</span>:<span class="st" style="color: #20794D;">"has_lift"</span>,</span>
-<span id="cb6-6">        <span class="st" style="color: #20794D;">"inventory_amenities_has_parking"</span>:<span class="st" style="color: #20794D;">"has_parking"</span>,</span>
-<span id="cb6-7">        <span class="st" style="color: #20794D;">"inventory_amenities_has_servant_room"</span>:<span class="st" style="color: #20794D;">"has_servant_room"</span>,</span>
-<span id="cb6-8">        <span class="st" style="color: #20794D;">"inventory_amenities_has_swimming_pool"</span>:<span class="st" style="color: #20794D;">"has_pool"</span>,</span>
-<span id="cb6-9">        <span class="st" style="color: #20794D;">"inventory_amenities_is_gated_community"</span>:<span class="st" style="color: #20794D;">"has_gated_community"</span>,</span>
-<span id="cb6-10">        <span class="st" style="color: #20794D;">"inventory_canonical_url"</span>:<span class="st" style="color: #20794D;">"URL"</span>,</span>
-<span id="cb6-11">        <span class="st" style="color: #20794D;">"inventory_configs_0_apartment_type_id"</span>:<span class="st" style="color: #20794D;">"appt_type_id"</span>,</span>
-<span id="cb6-12">        <span class="st" style="color: #20794D;">"inventory_configs_0_area"</span>:<span class="st" style="color: #20794D;">"area"</span>,</span>
-<span id="cb6-13">        <span class="st" style="color: #20794D;">"inventory_configs_0_facing"</span>:<span class="st" style="color: #20794D;">"facing"</span>,</span>
-<span id="cb6-14">        <span class="st" style="color: #20794D;">"inventory_configs_0_is_available"</span>:<span class="st" style="color: #20794D;">"is_available"</span>,</span>
-<span id="cb6-15">        <span class="st" style="color: #20794D;">"inventory_configs_0_number_of_bedrooms"</span>:<span class="st" style="color: #20794D;">"bedrooms"</span>,</span>
-<span id="cb6-16">        <span class="st" style="color: #20794D;">"inventory_configs_0_number_of_toilets"</span>:<span class="st" style="color: #20794D;">"toilets"</span>,</span>
-<span id="cb6-17">        <span class="st" style="color: #20794D;">"inventory_configs_0_parking_count"</span>:<span class="st" style="color: #20794D;">"parking_count"</span>,</span>
-<span id="cb6-18">        <span class="st" style="color: #20794D;">"inventory_configs_0_per_sqft_rate"</span>:<span class="st" style="color: #20794D;">"sqft_rate"</span>,</span>
-<span id="cb6-19">        <span class="st" style="color: #20794D;">"inventory_configs_0_price"</span>:<span class="st" style="color: #20794D;">"price"</span>,</span>
-<span id="cb6-20">        <span class="st" style="color: #20794D;">"inventory_configs_0_property_type_id"</span>:<span class="st" style="color: #20794D;">"property_type"</span>,</span>
-<span id="cb6-21">        <span class="st" style="color: #20794D;">"is_blocked"</span>:<span class="st" style="color: #20794D;">"is_blocked"</span>,</span>
-<span id="cb6-22">        <span class="st" style="color: #20794D;">"is_featured"</span>:<span class="st" style="color: #20794D;">"is_featured"</span>,</span>
-<span id="cb6-23">        <span class="st" style="color: #20794D;">"is_uc_property"</span>:<span class="st" style="color: #20794D;">"is_uc_property"</span>,</span>
-<span id="cb6-24">        <span class="st" style="color: #20794D;">"polygons_hash_city_name"</span>:<span class="st" style="color: #20794D;">"city"</span>,</span>
-<span id="cb6-25">        <span class="st" style="color: #20794D;">"polygons_hash_housing_region_name"</span>:<span class="st" style="color: #20794D;">"housing_region"</span>,</span>
-<span id="cb6-26">        <span class="st" style="color: #20794D;">"polygons_hash_state_name"</span>:<span class="st" style="color: #20794D;">"state"</span>,</span>
-<span id="cb6-27">        <span class="st" style="color: #20794D;">"polygons_hash_sublocality_name"</span>:<span class="st" style="color: #20794D;">"sub_locality"</span>,</span>
-<span id="cb6-28">        <span class="st" style="color: #20794D;">"price_on_request"</span>:<span class="st" style="color: #20794D;">"price_on_request"</span>,</span>
-<span id="cb6-29">        <span class="st" style="color: #20794D;">"show_loan_option"</span>:<span class="st" style="color: #20794D;">"has_loan"</span>,</span>
-<span id="cb6-30">        <span class="st" style="color: #20794D;">"status"</span>:<span class="st" style="color: #20794D;">"status"</span>,</span>
-<span id="cb6-31">        <span class="st" style="color: #20794D;">"street_info"</span>:<span class="st" style="color: #20794D;">"street"</span>,</span>
-<span id="cb6-32">        <span class="st" style="color: #20794D;">"title"</span>:<span class="st" style="color: #20794D;">"title"</span>,<span class="st" style="color: #20794D;">"type"</span>:<span class="st" style="color: #20794D;">"sale_type"</span>,</span>
-<span id="cb6-33">        <span class="st" style="color: #20794D;">"updated_at"</span>:<span class="st" style="color: #20794D;">"updated_on"</span>,</span>
-<span id="cb6-34">        <span class="st" style="color: #20794D;">"_id"</span>: <span class="st" style="color: #20794D;">"id"</span>,</span>
-<span id="cb6-35">        <span class="st" style="color: #20794D;">"display_neighbourhood_0"</span>: <span class="st" style="color: #20794D;">"locality"</span>}</span></code></pre></div>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">columns <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"completion_date"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"completed_on"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ctr"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"CTR"</span>,</span>
+<span id="cb6-2">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"date_added"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"date_added"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"date_added_in_seconds"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"listing_date_seconds"</span>,</span>
+<span id="cb6-3">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"developer_name"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"developer_name"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"featured_type"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"featured_type"</span>,</span>
+<span id="cb6-4">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"impressions"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"impressions"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_amenities_has_gas_pipeline"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"has_gas"</span>,</span>
+<span id="cb6-5">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_amenities_has_gym"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"has_gym"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_amenities_has_lift"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"has_lift"</span>,</span>
+<span id="cb6-6">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_amenities_has_parking"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"has_parking"</span>,</span>
+<span id="cb6-7">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_amenities_has_servant_room"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"has_servant_room"</span>,</span>
+<span id="cb6-8">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_amenities_has_swimming_pool"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"has_pool"</span>,</span>
+<span id="cb6-9">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_amenities_is_gated_community"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"has_gated_community"</span>,</span>
+<span id="cb6-10">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_canonical_url"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"URL"</span>,</span>
+<span id="cb6-11">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_apartment_type_id"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"appt_type_id"</span>,</span>
+<span id="cb6-12">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_area"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"area"</span>,</span>
+<span id="cb6-13">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_facing"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"facing"</span>,</span>
+<span id="cb6-14">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_is_available"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is_available"</span>,</span>
+<span id="cb6-15">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_number_of_bedrooms"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bedrooms"</span>,</span>
+<span id="cb6-16">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_number_of_toilets"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"toilets"</span>,</span>
+<span id="cb6-17">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_parking_count"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parking_count"</span>,</span>
+<span id="cb6-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_per_sqft_rate"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sqft_rate"</span>,</span>
+<span id="cb6-19">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_price"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"price"</span>,</span>
+<span id="cb6-20">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inventory_configs_0_property_type_id"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"property_type"</span>,</span>
+<span id="cb6-21">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is_blocked"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is_blocked"</span>,</span>
+<span id="cb6-22">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is_featured"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is_featured"</span>,</span>
+<span id="cb6-23">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is_uc_property"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is_uc_property"</span>,</span>
+<span id="cb6-24">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"polygons_hash_city_name"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"city"</span>,</span>
+<span id="cb6-25">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"polygons_hash_housing_region_name"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"housing_region"</span>,</span>
+<span id="cb6-26">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"polygons_hash_state_name"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"state"</span>,</span>
+<span id="cb6-27">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"polygons_hash_sublocality_name"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sub_locality"</span>,</span>
+<span id="cb6-28">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"price_on_request"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"price_on_request"</span>,</span>
+<span id="cb6-29">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"show_loan_option"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"has_loan"</span>,</span>
+<span id="cb6-30">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"status"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"status"</span>,</span>
+<span id="cb6-31">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"street_info"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"street"</span>,</span>
+<span id="cb6-32">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"title"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"title"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sale_type"</span>,</span>
+<span id="cb6-33">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"updated_at"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"updated_on"</span>,</span>
+<span id="cb6-34">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>,</span>
+<span id="cb6-35">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"display_neighbourhood_0"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"locality"</span>}</span></code></pre></div>
 <p>Next, I kept the necessary columns and renamed them.</p>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">temp <span class="op" style="color: #5E5E5E;">=</span> df[columns.keys()]</span>
-<span id="cb7-2">temp <span class="op" style="color: #5E5E5E;">=</span> temp.rename(columns<span class="op" style="color: #5E5E5E;">=</span>columns).drop_duplicates(<span class="st" style="color: #20794D;">'id'</span>)</span>
-<span id="cb7-3"><span class="bu" style="color: null;">print</span> temp.shape</span></code></pre></div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">temp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df[columns.keys()]</span>
+<span id="cb7-2">temp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> temp.rename(columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>columns).drop_duplicates(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'id'</span>)</span>
+<span id="cb7-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span> temp.shape</span></code></pre></div>
 <pre><code>(24482, 41)</code></pre>
 <p>We have reduced to 41 columns and 24 thousand properties now.</p>
 <section id="missing-values-in-data" class="level3">
 <h3 class="anchored" data-anchor-id="missing-values-in-data">Missing values in data</h3>
 <p>Parental advisory: if your kid comes home with a data set with a long list of columns, do not let them try the following visualization. It may cause dizziness on empty stomach.</p>
 <p>But, the same viz helps to see the amount of null values that exist in each column.</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">df_temp <span class="op" style="color: #5E5E5E;">=</span> pd.DataFrame({col: {<span class="st" style="color: #20794D;">'Empty'</span>: temp[temp[col].isnull()].shape[<span class="dv" style="color: #AD0000;">0</span>], <span class="st" style="color: #20794D;">'Total'</span>: temp.shape[<span class="dv" style="color: #AD0000;">0</span>]} <span class="cf" style="color: #003B4F;">for</span> col <span class="kw" style="color: #003B4F;">in</span> temp})</span></code></pre></div>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">df_temp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.DataFrame({col: {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Empty'</span>: temp[temp[col].isnull()].shape[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Total'</span>: temp.shape[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]} <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> col <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> temp})</span></code></pre></div>
 <p>So we made a new data frame, which kept a count of empty cells against non-empty cells. It looked like this:</p>
 <div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">df_temp.T.head()</span></code></pre></div>
 <div>
-
-<table class="dataframe table table-sm table-striped">
+<table class="dataframe table table-sm table-striped small">
 <thead>
 <tr>
 <th>
@@ -569,35 +1134,85 @@ bedrooms
 </td>
 </tr>
 </tbody>
-
 </table>
 </div>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">df_temp.<span class="bu" style="color: null;">apply</span>(<span class="kw" style="color: #003B4F;">lambda</span> v: (v.Total <span class="op" style="color: #5E5E5E;">-</span> v.Empty)<span class="op" style="color: #5E5E5E;">/</span><span class="bu" style="color: null;">float</span>(v.Total) <span class="op" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">100</span>).plot(kind<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'barh'</span>, figsize<span class="op" style="color: #5E5E5E;">=</span>(<span class="dv" style="color: #AD0000;">10</span>, <span class="dv" style="color: #AD0000;">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">df_temp.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">apply</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> v: (v.Total <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> v.Empty)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(v.Total) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>).plot(kind<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'barh'</span>, figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>))</span></code></pre></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2938ff60&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_24_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>From the above visual we gather that, <em>developer_name</em> column is almost empty. Giving it company are, the <em>sub_locality</em>, <em>housing_region</em> and <em>locality</em> columns.</p>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># temp = temp[filter(lambda v: v not in ['sub_locality', 'housing_region', 'locality'], temp.columns)]</span></span></code></pre></div>
-<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># let's drop "status" from the data because it has only one value</span></span>
-<span id="cb14-2"><span class="bu" style="color: null;">print</span> temp.status.unique()</span>
-<span id="cb14-3"><span class="bu" style="color: null;">print</span> <span class="st" style="color: #20794D;">"dropping status column from temp"</span></span>
-<span id="cb14-4">temp <span class="op" style="color: #5E5E5E;">=</span> temp.drop(<span class="st" style="color: #20794D;">'status'</span>, <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># temp = temp[filter(lambda v: v not in ['sub_locality', 'housing_region', 'locality'], temp.columns)]</span></span></code></pre></div>
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># let's drop "status" from the data because it has only one value</span></span>
+<span id="cb14-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span> temp.status.unique()</span>
+<span id="cb14-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dropping status column from temp"</span></span>
+<span id="cb14-4">temp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> temp.drop(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'status'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
 <pre><code>[u'ACTIVE']
 dropping status column from temp</code></pre>
 </section>
 <section id="what-does-the-distribution-of-listings-across-states-look-like" class="level3">
 <h3 class="anchored" data-anchor-id="what-does-the-distribution-of-listings-across-states-look-like">What does the distribution of listings across states look like ?</h3>
 <p>Maharashtra leads followed by Karnataka and Tamil Nadu.</p>
-<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">sns.countplot(y<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"state"</span>, data<span class="op" style="color: #5E5E5E;">=</span>temp, palette<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"Blues_d"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">sns.countplot(y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"state"</span>, data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>temp, palette<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Blues_d"</span>)</span></code></pre></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x29111550&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_30_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 </section>
@@ -605,49 +1220,99 @@ dropping status column from temp</code></pre>
 <h3 class="anchored" data-anchor-id="and-how-about-the-price-distribution">And how about the price distribution ?</h3>
 <p>Well, in our dataset, Maharashtra seems to be a really pricey state to buy properties in.</p>
 <p>A sizeable chunk of the listings in the state lies between 5-10 crores per piece. No other state seems to come close to Maharashtra’s behaviour.</p>
-<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">sns.stripplot(temp[<span class="st" style="color: #20794D;">"price"</span>], temp[<span class="st" style="color: #20794D;">'state'</span>], order<span class="op" style="color: #5E5E5E;">=</span>temp.state.dropna().unique())</span>
-<span id="cb18-2">plt.title(<span class="st" style="color: #20794D;">"Listing prices across states"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">sns.stripplot(temp[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"price"</span>], temp[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'state'</span>], order<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>temp.state.dropna().unique())</span>
+<span id="cb18-2">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Listing prices across states"</span>)</span></code></pre></div>
 <pre><code>&lt;matplotlib.text.Text at 0x2ea3c128&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_33_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 </section>
 <section id="what-about-the-metro-cities-then" class="level3">
 <h3 class="anchored" data-anchor-id="what-about-the-metro-cities-then">What about the metro cities, then ?</h3>
 <p>A metropolitan area according to the Wikipedia definition is - “The Constitution (seventy-fourth Amendment) Act, 1992 defines a metropolitan area in India as, an area having a population of ten lakhs or more, comprised in one or more districts and consisting of two or more Municipalities or Panchayats or other contiguous areas, specified by the Governor by public notification to be a Metropolitan area.” <a href="https://en.wikipedia.org/wiki/List_of_metropolitan_areas_in_India">Source</a></p>
-<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">metros <span class="op" style="color: #5E5E5E;">=</span> [<span class="st" style="color: #20794D;">'New Delhi'</span>,</span>
-<span id="cb20-2"><span class="st" style="color: #20794D;">'Mumbai'</span>, </span>
-<span id="cb20-3"><span class="st" style="color: #20794D;">'Kolkata'</span>,</span>
-<span id="cb20-4"><span class="st" style="color: #20794D;">'Bangalore'</span>, </span>
-<span id="cb20-5"><span class="st" style="color: #20794D;">'Pune'</span>,</span>
-<span id="cb20-6"><span class="st" style="color: #20794D;">'Hyderabad'</span>,</span>
-<span id="cb20-7"><span class="st" style="color: #20794D;">'Chennai'</span>,</span>
-<span id="cb20-8"><span class="st" style="color: #20794D;">'Surat'</span>,</span>
-<span id="cb20-9"><span class="st" style="color: #20794D;">'Visakhapatnam'</span>,</span>
-<span id="cb20-10"><span class="st" style="color: #20794D;">'Kanpur'</span>]</span>
+<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">metros <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'New Delhi'</span>,</span>
+<span id="cb20-2"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Mumbai'</span>, </span>
+<span id="cb20-3"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Kolkata'</span>,</span>
+<span id="cb20-4"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Bangalore'</span>, </span>
+<span id="cb20-5"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Pune'</span>,</span>
+<span id="cb20-6"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Hyderabad'</span>,</span>
+<span id="cb20-7"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Chennai'</span>,</span>
+<span id="cb20-8"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Surat'</span>,</span>
+<span id="cb20-9"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Visakhapatnam'</span>,</span>
+<span id="cb20-10"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Kanpur'</span>]</span>
 <span id="cb20-11"></span>
-<span id="cb20-12">metro_data <span class="op" style="color: #5E5E5E;">=</span> temp[temp.city.isin(metros)]</span>
-<span id="cb20-13">sns.stripplot(metro_data[<span class="st" style="color: #20794D;">"price"</span>], metro_data[<span class="st" style="color: #20794D;">'city'</span>], order<span class="op" style="color: #5E5E5E;">=</span>metro_data.city.dropna().unique())</span>
-<span id="cb20-14">plt.title(<span class="st" style="color: #20794D;">"Listing prices across metro cities"</span>)</span></code></pre></div>
+<span id="cb20-12">metro_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> temp[temp.city.isin(metros)]</span>
+<span id="cb20-13">sns.stripplot(metro_data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"price"</span>], metro_data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'city'</span>], order<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>metro_data.city.dropna().unique())</span>
+<span id="cb20-14">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Listing prices across metro cities"</span>)</span></code></pre></div>
 <pre><code>&lt;matplotlib.text.Text at 0x2e2cfe80&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_36_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>Apparently, Mumbai lags behind New Delhi in prices. Though it would be interesting to track down for Maharashtra’s price lead as a state, but we will take a raincheck on it. Remember, we are house hunting in Delhi because yours-truly resides there.</p>
 <p>housing.com also provides a column called <em>appt_type_id</em>. This may provide insight to the <em>appt_type_id</em> we should be looking at.</p>
-<div class="sourceCode" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">sns.stripplot(temp[<span class="st" style="color: #20794D;">'appt_type_id'</span>], temp[<span class="st" style="color: #20794D;">"price"</span>],  order<span class="op" style="color: #5E5E5E;">=</span>temp[<span class="st" style="color: #20794D;">'appt_type_id'</span>].dropna().unique())</span>
-<span id="cb22-2">plt.title(<span class="st" style="color: #20794D;">"price variation across appartment type"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">sns.stripplot(temp[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'appt_type_id'</span>], temp[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"price"</span>],  order<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>temp[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'appt_type_id'</span>].dropna().unique())</span>
+<span id="cb22-2">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"price variation across appartment type"</span>)</span></code></pre></div>
 <pre><code>&lt;matplotlib.text.Text at 0x177e3278&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_39_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>Appartment types - 4, 5, 6, 7, 45 - seems to show a broad range of prices than the rest.</p>
@@ -655,51 +1320,209 @@ dropping status column from temp</code></pre>
 <section id="correlations" class="level3">
 <h3 class="anchored" data-anchor-id="correlations">Correlations</h3>
 <p>Some obvious learnings : - More bedrooms usually means more toilets. - Price has an inclination to rise linearly with area. - Area in sq ft though does not rise linearly beyond a certain limit.</p>
-<div class="sourceCode" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">features <span class="op" style="color: #5E5E5E;">=</span> [<span class="st" style="color: #20794D;">'bedrooms'</span>, <span class="st" style="color: #20794D;">'area'</span>, <span class="st" style="color: #20794D;">'price'</span>, <span class="st" style="color: #20794D;">'toilets'</span>]</span>
-<span id="cb24-2">df_temp <span class="op" style="color: #5E5E5E;">=</span> temp[features].stack().unstack()</span>
+<div class="sourceCode" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">features <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bedrooms'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'area'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'price'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'toilets'</span>]</span>
+<span id="cb24-2">df_temp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> temp[features].stack().unstack()</span>
 <span id="cb24-3">sns.pairplot(df_temp)</span></code></pre></div>
 <pre><code>&lt;seaborn.axisgrid.PairGrid at 0x32e352e8&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_43_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>To bring out the correlations more sharply, let’s create a heatmap</p>
-<div class="sourceCode" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1">fig, ax <span class="op" style="color: #5E5E5E;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;">=</span>(<span class="dv" style="color: #AD0000;">4</span>, <span class="dv" style="color: #AD0000;">4</span>))</span>
-<span id="cb26-2">features <span class="op" style="color: #5E5E5E;">=</span> [<span class="st" style="color: #20794D;">'bedrooms'</span>, <span class="st" style="color: #20794D;">'area'</span>, <span class="st" style="color: #20794D;">'price'</span>, <span class="st" style="color: #20794D;">'toilets'</span>]</span>
-<span id="cb26-3">sns.heatmap((temp[features].corr() <span class="op" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">100</span>).applymap(<span class="bu" style="color: null;">int</span>), annot<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">True</span>, fmt<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"d"</span>, ax<span class="op" style="color: #5E5E5E;">=</span>ax, linewidth<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>))</span>
+<span id="cb26-2">features <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bedrooms'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'area'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'price'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'toilets'</span>]</span>
+<span id="cb26-3">sns.heatmap((temp[features].corr() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>).applymap(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>), annot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, fmt<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"d"</span>, ax<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ax, linewidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">.4</span>)</span></code></pre></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2fc52d68&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_45_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>Alright, so which of the ammenities affect the housing prices much ?</p>
-<div class="sourceCode" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">df_temp <span class="op" style="color: #5E5E5E;">=</span> temp[[<span class="st" style="color: #20794D;">'has_pool'</span>, <span class="st" style="color: #20794D;">'has_gated_community'</span>, <span class="st" style="color: #20794D;">'has_gas'</span>, <span class="st" style="color: #20794D;">u'has_gym'</span>, <span class="st" style="color: #20794D;">u'has_lift'</span>, <span class="st" style="color: #20794D;">'has_parking'</span>, <span class="st" style="color: #20794D;">'has_loan'</span>]].astype(<span class="bu" style="color: null;">int</span>)</span>
-<span id="cb28-2">df_temp[<span class="st" style="color: #20794D;">'price'</span>] <span class="op" style="color: #5E5E5E;">=</span> temp[<span class="st" style="color: #20794D;">'price'</span>]</span>
-<span id="cb28-3">fig, ax <span class="op" style="color: #5E5E5E;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;">=</span>(<span class="dv" style="color: #AD0000;">4</span>, <span class="dv" style="color: #AD0000;">4</span>))</span>
-<span id="cb28-4">sns.heatmap((df_temp.corr() <span class="op" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">100</span>).applymap(<span class="bu" style="color: null;">int</span>), annot<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">True</span>, fmt<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"d"</span>, ax<span class="op" style="color: #5E5E5E;">=</span>ax, linewidth<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">df_temp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> temp[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_pool'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_gated_community'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_gas'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">u'has_gym'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">u'has_lift'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_parking'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_loan'</span>]].astype(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>)</span>
+<span id="cb28-2">df_temp[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'price'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> temp[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'price'</span>]</span>
+<span id="cb28-3">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>))</span>
+<span id="cb28-4">sns.heatmap((df_temp.corr() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>).applymap(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>), annot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, fmt<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"d"</span>, ax<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ax, linewidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">.4</span>)</span></code></pre></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x3047fc50&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_47_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>Wow, it seems price has the most correlation with the availability of gas. I always assumed, having a pool makes things pricier. Let’s see if this holds true for a land-locked city like New Delhi.</p>
-<div class="sourceCode" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1">df_temp <span class="op" style="color: #5E5E5E;">=</span> temp[temp.city.isin([<span class="st" style="color: #20794D;">'New Delhi'</span>])].fillna(<span class="dv" style="color: #AD0000;">0</span>)</span>
-<span id="cb30-2">ammenities <span class="op" style="color: #5E5E5E;">=</span> [<span class="st" style="color: #20794D;">'has_pool'</span>, <span class="st" style="color: #20794D;">'has_gated_community'</span>, <span class="st" style="color: #20794D;">'has_gas'</span>, <span class="st" style="color: #20794D;">u'has_gym'</span>, <span class="st" style="color: #20794D;">u'has_lift'</span>, <span class="st" style="color: #20794D;">'has_parking'</span>, <span class="st" style="color: #20794D;">'has_loan'</span>, <span class="st" style="color: #20794D;">'price'</span>]</span>
-<span id="cb30-3">df_temp <span class="op" style="color: #5E5E5E;">=</span> df_temp[ammenities].astype(<span class="bu" style="color: null;">int</span>)</span>
+<div class="sourceCode" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1">df_temp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> temp[temp.city.isin([<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'New Delhi'</span>])].fillna(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb30-2">ammenities <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_pool'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_gated_community'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_gas'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">u'has_gym'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">u'has_lift'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_parking'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'has_loan'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'price'</span>]</span>
+<span id="cb30-3">df_temp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df_temp[ammenities].astype(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>)</span>
 <span id="cb30-4"></span>
-<span id="cb30-5">fig, ax <span class="op" style="color: #5E5E5E;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;">=</span>(<span class="dv" style="color: #AD0000;">4</span>, <span class="dv" style="color: #AD0000;">4</span>))</span>
-<span id="cb30-6">sns.heatmap((df_temp.corr() <span class="op" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">100</span>).applymap(<span class="bu" style="color: null;">int</span>), annot<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">True</span>,  fmt<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"d"</span>, ax<span class="op" style="color: #5E5E5E;">=</span>ax, linewidth<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">.4</span>)</span></code></pre></div>
+<span id="cb30-5">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>))</span>
+<span id="cb30-6">sns.heatmap((df_temp.corr() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>).applymap(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>), annot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,  fmt<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"d"</span>, ax<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ax, linewidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">.4</span>)</span></code></pre></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2fca82b0&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/output_49_1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>As we see above, the factors affecting price are the availability of gas, a lift, a parking space and to some extent a gated community.</p>
@@ -712,7 +1535,7 @@ dropping status column from temp</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/housing_scatterplot.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>Further : - it would be nice idea to let the user (me) click on a circle to directly open the listing without having to open the browser. Bokeh 0.15 has a bug with JSON parsing, which I need to get to fixing or wait for the 0.16 version. - The street addresses in the data set could give information about banks, ATMs, hospitals and malls, which could be used to further understand the price. - For places with widespread metro services like Delhi, Gurgaon and Noida, distance to the nearest metro station could be a prime deciding factor in price hike.</p>
@@ -723,15 +1546,15 @@ dropping status column from temp</code></pre>
 </section>
 
  ]]></description>
-  <guid>https://fx86.github.io/posts/house-hunting-with-data/index.html</guid>
-  <pubDate>Tue, 11 Apr 2017 18:30:00 GMT</pubDate>
-  <media:content url="https://fx86.github.io/assets/images/housing-maps.png" medium="image" type="image/png" height="76" width="144"/>
+  <guid>https://fx86.github.io/posts/house-hunting-with-data/</guid>
+  <pubDate>Wed, 12 Apr 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Sentiment analysis with textblob</title>
-  <dc:creator>fibinse</dc:creator>
-  <link>https://fx86.github.io/posts/sentiment-analysis-with-textblob/index.html</link>
+  <dc:creator>fibinse </dc:creator>
+  <link>https://fx86.github.io/posts/sentiment-analysis-with-textblob/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -740,64 +1563,230 @@ dropping status column from temp</code></pre>
 <p>We would need the <code>textblob</code> python package for this, which can be installed by executing: <code>pip install textblob</code>.</p>
 <p>And, then you should run the following to download the necessary NLTK’s english corpus: <code>python -m textblob.download_corpora</code></p>
 <p>Let’s import the packages we need:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;">from</span> textblob <span class="im" style="color: #00769E;">import</span> TextBlob</span>
-<span id="cb1-2"><span class="im" style="color: #00769E;">from</span> textblob.classifiers <span class="im" style="color: #00769E;">import</span> NaiveBayesClassifier</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;">from</span> textblob.sentiments <span class="im" style="color: #00769E;">import</span> NaiveBayesAnalyzer</span>
-<span id="cb1-4"><span class="im" style="color: #00769E;">from</span> textblob <span class="im" style="color: #00769E;">import</span> Blobber</span>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> textblob <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> TextBlob</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> textblob.classifiers <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> NaiveBayesClassifier</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> textblob.sentiments <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> NaiveBayesAnalyzer</span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> textblob <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Blobber</span>
 <span id="cb1-5"></span>
-<span id="cb1-6"><span class="im" style="color: #00769E;">import</span> pandas <span class="im" style="color: #00769E;">as</span> pd</span>
-<span id="cb1-7"><span class="im" style="color: #00769E;">import</span> seaborn <span class="im" style="color: #00769E;">as</span> sns</span>
-<span id="cb1-8"><span class="op" style="color: #5E5E5E;">%</span>matplotlib inline</span></code></pre></div>
+<span id="cb1-6"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-7"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sns</span>
+<span id="cb1-8"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span>matplotlib inline</span></code></pre></div>
 <p>We will use the STS Gold tweet <a href="http://tweenator.com/index.php?page_id=13">dataset</a> for training the Naive Bayes classifier. The tweets in this dataset are already annotated with its positive and negative polarity. STS Gold tweet data set was selected from the several available based on several suggestions which can be found in this <a href="http://ceur-ws.org/Vol-1096/paper1.pdf">paper</a>.</p>
 <p>Once you have downloaded the STS Gold dataset, please unzip it and place “sts_gold_tweet.csv” file in the current folder. Then:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;">#read the file</span></span>
-<span id="cb2-2">data <span class="op" style="color: #5E5E5E;">=</span> pd.read_csv(<span class="st" style="color: #20794D;">"sts_gold_tweet.csv"</span>, sep<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">";"</span>, encoding<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"utf-8"</span>).drop(<span class="st" style="color: #20794D;">'id'</span>, <span class="dv" style="color: #AD0000;">1</span>)</span>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#read the file</span></span>
+<span id="cb2-2">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sts_gold_tweet.csv"</span>, sep<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">";"</span>, encoding<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"utf-8"</span>).drop(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'id'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
 <span id="cb2-3"></span>
-<span id="cb2-4"><span class="co" style="color: #5E5E5E;"># replace 4 with 'post' and 0 as 'neg' in 'polarity' column</span></span>
-<span id="cb2-5">data[<span class="st" style="color: #20794D;">'polarity'</span>] <span class="op" style="color: #5E5E5E;">=</span> data.replace({<span class="dv" style="color: #AD0000;">4</span>: <span class="st" style="color: #20794D;">'post'</span>, <span class="dv" style="color: #AD0000;">0</span>: <span class="st" style="color: #20794D;">'neg'</span>})</span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># replace 4 with 'post' and 0 as 'neg' in 'polarity' column</span></span>
+<span id="cb2-5">data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'polarity'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data.replace({<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'post'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'neg'</span>})</span>
 <span id="cb2-6"></span>
-<span id="cb2-7"><span class="co" style="color: #5E5E5E;"># convert the data into a list</span></span>
-<span id="cb2-8">data <span class="op" style="color: #5E5E5E;">=</span> data[[<span class="st" style="color: #20794D;">'tweet'</span>, <span class="st" style="color: #20794D;">'polarity'</span>]].values.tolist()</span>
+<span id="cb2-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># convert the data into a list</span></span>
+<span id="cb2-8">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tweet'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'polarity'</span>]].values.tolist()</span>
 <span id="cb2-9"></span>
-<span id="cb2-10">L <span class="op" style="color: #5E5E5E;">=</span> <span class="bu" style="color: null;">len</span>(data)</span>
-<span id="cb2-11">train_index <span class="op" style="color: #5E5E5E;">=</span> <span class="bu" style="color: null;">int</span>(<span class="fl" style="color: #AD0000;">0.60</span> <span class="op" style="color: #5E5E5E;">*</span> L)</span>
+<span id="cb2-10">L <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(data)</span>
+<span id="cb2-11">train_index <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.60</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> L)</span>
 <span id="cb2-12"></span>
-<span id="cb2-13"><span class="co" style="color: #5E5E5E;"># split the data into a train and test data</span></span>
-<span id="cb2-14">train, test <span class="op" style="color: #5E5E5E;">=</span> data[:train_index], data[train_index: ]</span></code></pre></div>
+<span id="cb2-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># split the data into a train and test data</span></span>
+<span id="cb2-14">train, test <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data[:train_index], data[train_index: ]</span></code></pre></div>
 <p>Now, let’s train the Naive Bayes Classifier on this training data. (P.S: on a 8GB RAM laptop, it took a good portion of an hour to train!)</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">cl <span class="op" style="color: #5E5E5E;">=</span> NaiveBayesClassifier(train)</span>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">cl <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> NaiveBayesClassifier(train)</span>
 <span id="cb3-2">cl.accuracy(test)</span></code></pre></div>
 <p>To know the sentiment of a text, pass it to the TextBlob function and use it’s sentiment property to know its positivity and negativity.</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">blob <span class="op" style="color: #5E5E5E;">=</span> TextBlob(<span class="st" style="color: #20794D;">"The beer is very good."</span>, classifier<span class="op" style="color: #5E5E5E;">=</span>cl)</span>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">blob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> TextBlob(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The beer is very good."</span>, classifier<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>cl)</span>
 <span id="cb4-2">blob.sentiment</span>
 <span id="cb4-3"></span>
-<span id="cb4-4">Out[<span class="dv" style="color: #AD0000;">65</span>] : Sentiment(polarity<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">0.9099999999999999</span>, subjectivity<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">0.7800000000000001</span>)</span></code></pre></div>
+<span id="cb4-4">Out[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">65</span>] : Sentiment(polarity<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9099999999999999</span>, subjectivity<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7800000000000001</span>)</span></code></pre></div>
 <p>Great! So looks like our classifier is ready.</p>
 <p>Now, let’s pickle it and save ourselves some training time, later.</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;">import</span> pickle</span>
-<span id="cb5-2">pickled_classifier_file <span class="op" style="color: #5E5E5E;">=</span> <span class="bu" style="color: null;">open</span>(<span class="st" style="color: #20794D;">'sentiment_classifier.obj'</span>, <span class="st" style="color: #20794D;">'wb'</span>)</span>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pickle</span>
+<span id="cb5-2">pickled_classifier_file <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sentiment_classifier.obj'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'wb'</span>)</span>
 <span id="cb5-3">pickle.dump(cl, pickled_classifier_file)</span>
 <span id="cb5-4">pickled_classifier_file.close()</span></code></pre></div>
 <p>To load a classifier from a pickled object, use pickle.load:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">cl <span class="op" style="color: #5E5E5E;">=</span> pickle.load(<span class="bu" style="color: null;">open</span>(<span class="st" style="color: #20794D;">'sentiment_classifier.obj'</span>, <span class="st" style="color: #20794D;">'rb'</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">cl <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pickle.load(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sentiment_classifier.obj'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rb'</span>))</span></code></pre></div>
 <p>Now, let’s put this classifier to use against a real world data set. The MAGAtweets.csv data set which can be downloaded from <a href="https://data.world/wendyhe/tweets-on-womensmarch-and-maga">here</a> contains tweets about women’s march and the #MAGA hashtag. Feel free to use any other tweet data that you are comfortable with.</p>
 <blockquote class="blockquote">
 <p>The <code>TextBlob</code> class trains the classifier each time it is executed. On this machine, it took 5 seconds per execution. Hence, we will use <code>Blobber</code> class instead.</p>
 </blockquote>
 <p><code>tb = Blobber(analyzer=NaiveBayesAnalyzer())</code></p>
 <p>Loading the tweet data to be classified -</p>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">tweet_data <span class="op" style="color: #5E5E5E;">=</span> pd.read_csv(<span class="st" style="color: #20794D;">"MAGAtweets.csv"</span>, encoding<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"utf-8"</span>)</span>
-<span id="cb7-2">tweet_data <span class="op" style="color: #5E5E5E;">=</span> tweet_data.sort_values(<span class="st" style="color: #20794D;">'created_at'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">tweet_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"MAGAtweets.csv"</span>, encoding<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"utf-8"</span>)</span>
+<span id="cb7-2">tweet_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> tweet_data.sort_values(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'created_at'</span>)</span></code></pre></div>
 <p>Classifying the tweets now -</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">tweet_data[[<span class="st" style="color: #20794D;">'nb_sentiment'</span>, <span class="st" style="color: #20794D;">'nb_pos'</span>, <span class="st" style="color: #20794D;">'nb_neg'</span>]] <span class="op" style="color: #5E5E5E;">=</span> tweet_data.text.<span class="bu" style="color: null;">apply</span>(<span class="kw" style="color: #003B4F;">lambda</span> v: pd.Series(tb(v).sentiment))</span>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">tweet_data[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'nb_sentiment'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'nb_pos'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'nb_neg'</span>]] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> tweet_data.text.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">apply</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> v: pd.Series(tb(v).sentiment))</span>
 <span id="cb8-2">tweet_data.head()</span></code></pre></div>
 <p><img src="https://fx86.github.io/assets/images/sentiments_in_a_table.png" class="img-fluid" alt="image-title-here">{:class=“img-responsive”}</p>
 <p>Let’s try doing the same with <code>textblob</code>’s in-built Pattern analyser -</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">tb <span class="op" style="color: #5E5E5E;">=</span> Blobber()</span>
-<span id="cb9-2">tweet_data[[<span class="st" style="color: #20794D;">'pattern_polarity'</span>, <span class="st" style="color: #20794D;">'pattern_subj'</span>]] <span class="op" style="color: #5E5E5E;">=</span> tweet_data.text.<span class="bu" style="color: null;">apply</span>(<span class="kw" style="color: #003B4F;">lambda</span> v: pd.Series(tb(v).sentiment))</span>
-<span id="cb9-3">tweet_data[<span class="st" style="color: #20794D;">'pattern_pos'</span>]  <span class="op" style="color: #5E5E5E;">=</span> tweet_data.pattern_polarity.<span class="bu" style="color: null;">abs</span>()</span>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">tb <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Blobber()</span>
+<span id="cb9-2">tweet_data[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pattern_polarity'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pattern_subj'</span>]] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> tweet_data.text.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">apply</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> v: pd.Series(tb(v).sentiment))</span>
+<span id="cb9-3">tweet_data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pattern_pos'</span>]  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> tweet_data.pattern_polarity.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">abs</span>()</span>
 <span id="cb9-4"></span>
-<span id="cb9-5">tweet_data[[<span class="st" style="color: #20794D;">'pattern_pos'</span>, <span class="st" style="color: #20794D;">'nb_pos'</span>]].hist()</span></code></pre></div>
+<span id="cb9-5">tweet_data[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pattern_pos'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'nb_pos'</span>]].hist()</span></code></pre></div>
 <p>Observe the difference in the results -</p>
 <p><img src="https://fx86.github.io/assets/images/sentiment_histogram.jpg" class="img-fluid" alt="image-title-here">{:class=“img-responsive”}</p>
 <p>P.S: <code>textblob</code> is just one of the packages available in Python that can be used to perform sentiment analysis. Other capable packages that we know of would be - <code>nltk</code>, <code>scikit-learn</code>, <code>VADER</code>.</p>
@@ -805,15 +1794,15 @@ dropping status column from temp</code></pre>
 
 
  ]]></description>
-  <guid>https://fx86.github.io/posts/sentiment-analysis-with-textblob/index.html</guid>
-  <pubDate>Sat, 11 Feb 2017 18:30:00 GMT</pubDate>
-  <media:content url="https://fx86.github.io/assets/images/algorithms_can.jpg" medium="image" type="image/jpeg"/>
+  <guid>https://fx86.github.io/posts/sentiment-analysis-with-textblob/</guid>
+  <pubDate>Sun, 12 Feb 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Your mouse and you</title>
-  <dc:creator>fibinse</dc:creator>
-  <link>https://fx86.github.io/posts/your-mouse-and-you/index.html</link>
+  <dc:creator>fibinse </dc:creator>
+  <link>https://fx86.github.io/posts/your-mouse-and-you/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -834,7 +1823,7 @@ dropping status column from temp</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/mouse_cursor_behaviour.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">png</figcaption><p></p>
+<figcaption>png</figcaption>
 </figure>
 </div>
 <p>In total I figured I’ve used my mouse for almost an hour for the four hour period that I had gathered data for. And my wrists had moved my mouse a good 163 meters (assuming, 1 meter ~ 3779 pixels).</p>
@@ -842,7 +1831,7 @@ dropping status column from temp</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://fx86.github.io/assets/images/monkey_and_mouse.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">gif</figcaption><p></p>
+<figcaption>gif</figcaption>
 </figure>
 </div>
 <p>Keyboard shortcuts, anyone ?</p>
@@ -851,9 +1840,8 @@ dropping status column from temp</code></pre>
 </section>
 
  ]]></description>
-  <guid>https://fx86.github.io/posts/your-mouse-and-you/index.html</guid>
-  <pubDate>Sun, 01 Nov 2015 18:30:00 GMT</pubDate>
-  <media:content url="https://fx86.github.io/assets/images/mouse_cursor_behaviour.png" medium="image" type="image/png" height="79" width="144"/>
+  <guid>https://fx86.github.io/posts/your-mouse-and-you/</guid>
+  <pubDate>Mon, 02 Nov 2015 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
