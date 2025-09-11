@@ -1,0 +1,57 @@
+<!-- Disqus embed: will insert Disqus thread if meta[disqus-shortname] is present -->
+<div class="comments-section">
+  <h2>Comments</h2>
+  <div id="disqus_thread">
+    <p>Loading comments...</p>
+  </div>
+  <div id="disqus-fallback" style="display:none; margin-top:0.75rem; color:#6b7280; font-size:0.95rem;"></div>
+</div>
+<script>
+  (function(){
+    try {
+      const shortname = document.querySelector('meta[name="disqus-shortname"]')?.getAttribute('content');
+      const fallbackEl = document.getElementById('disqus-fallback');
+      const thread = document.getElementById('disqus_thread');
+
+      if (!shortname) {
+        if (fallbackEl) {
+          fallbackEl.style.display = 'block';
+          fallbackEl.innerHTML = 'Disqus not configured: no <code>disqus-shortname</code> meta tag found. Add your Disqus shortname to <code>_includes/disqus-meta.html</code> and re-render.';
+        }
+        return;
+      }
+
+      if (shortname.indexOf('PLACEHOLDER') !== -1) {
+        if (fallbackEl) {
+          fallbackEl.style.display = 'block';
+          fallbackEl.innerHTML = 'Disqus shortname is a placeholder. Replace the placeholder in <code>_includes/disqus-meta.html</code> with your real shortname.';
+        }
+        return;
+      }
+
+      // Provide page-specific identifiers so threads map correctly
+      window.disqus_config = function () {
+        this.page.url = window.location.protocol + '//' + window.location.host + window.location.pathname; // canonical-ish URL
+        this.page.identifier = window.location.pathname; // use path as identifier
+      };
+
+      var d = document, s = d.createElement('script');
+      s.src = 'https://' + shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      s.async = true;
+      (d.head || d.body).appendChild(s);
+
+      // If embed hasn't loaded in 6s, show troubleshooting hints
+      setTimeout(function(){
+        // Disqus replaces the thread div; if still present, show hints
+        const hasChildren = thread && thread.childElementCount > 0 && thread.querySelector('iframe');
+        if (!hasChildren && fallbackEl) {
+          fallbackEl.style.display = 'block';
+          const host = window.location.host;
+          fallbackEl.innerHTML = `We were unable to load Disqus. Common causes: invalid shortname, Disqus forum not created, or the current host (<strong>${host}</strong>) is not allowed in your Disqus settings. Verify your Disqus shortname in <code>_includes/disqus-meta.html</code> and test on the live site domain (for example: <code>https://fx86.github.io</code>).`;
+        }
+      }, 6000);
+
+    } catch (e) { console.warn('Disqus loader failed', e); }
+  })();
+</script>

@@ -1,0 +1,27 @@
+# options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: true
+
+# Enable banner style title blocks
+title-block-banner: true
+
+# Add reading time and TOC
+toc: true
+number-sections: false
+code-fold: show
+highlight-style: github
+citation: false
+
+# Add author byline
+author: "fibinse"
+
+# Add social sharing
+share: 
+  twitter: true
+  facebook: false
+  linkedin: true
+  email: true
+  
+# Comments are added via the _quarto.yml include-after-body directive

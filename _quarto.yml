@@ -1,0 +1,51 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - "assets/**"
+
+website:
+  title: "visualist.in"
+  site-url: https://fx86.github.io
+  description: "Personal blog about technology, data science, and more"
+  favicon: favicon.ico
+  repo-url: https://github.com/fx86/fx86.github.io
+  repo-actions: [edit, issue]
+  margin-header: subscribe.html
+  navbar:
+    background: primary
+    left:
+      - text: "Blog"
+        href: archive.qmd
+      # - text: "Portfolio"
+      #   href: portfolio.qmd
+      - text: "About"
+        href: about.qmd
+    right:
+      - icon: github
+        href: https://github.com/fx86
+      - icon: twitter
+        href: https://twitter.com/fx86
+      - icon: rss
+        href: index.xml
+  page-footer: 
+    left: "© 2025 Fx86. All rights reserved."
+    right:
+      - icon: github
+        href: https://github.com/fx86
+  google-analytics: "UA-XXXXXXXX-X"
+
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: true
+    code-copy: true
+    highlight-style: github
+    include-in-header:
+      - _includes/fonts.html
+      - _includes/google-analytics.html
+      - _includes/disqus-meta.html
+    include-after-body:
+      - _includes/disqus-embed.html
+      - _includes/fix-alignment.html

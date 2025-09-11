@@ -1,0 +1,19 @@
+---
+title: ""
+subtitle: ""
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  max-items: 5
+  feed: true
+  image-height: 170px
+  fields: [date, reading-time, title, description, image]
+
+page-layout: article
+title-block-banner: false
+image: profile.jpg
+---

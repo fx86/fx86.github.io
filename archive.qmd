@@ -1,0 +1,16 @@
+---
+title: "Archive"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: true
+  filter-ui: true
+  date-format: "MMMM D, YYYY"
+  fields: [date, title, author, description, reading-time, categories]
+page-layout: full
+title-block-banner: false
+---
+
+Welcome to my blog archive where you can browse all posts by category, date, or use the search function to find specific topics.

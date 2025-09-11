@@ -1,0 +1,23 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: trestles
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com/fx86
+    - icon: envelope
+      text: Email
+      href: mailto:fibinse.xavier@gmail.com
+
+---
+
+Building at the intersection of data science and AI creativity — where my code-editor is smarter than I am and my solutions occasionally work on the first try.
+
+## Contact
+
+Email: fibinse [dot] xavier [at] gmail [dot] com

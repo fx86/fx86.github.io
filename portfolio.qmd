@@ -1,0 +1,123 @@
+---
+title: "Portfolio"
+description: "Talks, Projects, and External Writing"
+toc: true
+page-layout: full
+css: portfolio.css
+---
+
+:::{.callout-note collapse="false"}
+This page showcases my professional work including talks, projects, and external writing. Sections with no content are automatically hidden.
+:::
+
+```{=html}
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  const sections = ['talks', 'projects', 'writing'];
+  
+  sections.forEach(section => {
+    const sectionEl = document.getElementById(section);
+    if (sectionEl) {
+      const items = sectionEl.querySelectorAll('.portfolio-item');
+      
+      // If there are no items in the section, hide the entire section
+      if (items.length === 0) {
+        const headingEl = document.querySelector(`h2[id="${section}-heading"]`);
+        if (headingEl) {
+          headingEl.style.display = 'none';
+        }
+        sectionEl.style.display = 'none';
+      }
+    }
+  });
+});
+</script>
+```
+
+## Talks {#talks-heading}
+
+<div id="talks" class="portfolio-section">
+<!-- 
+To add a talk, use the following format:
+<div class="portfolio-item">
+  <div class="portfolio-title">Talk Title</div>
+  <div class="portfolio-meta">Conference/Event Name (Date) | <a href="URL">Watch/Slides</a></div>
+  <div class="portfolio-description">Brief description of the talk</div>
+</div>
+-->
+
+<div class="portfolio-item">
+  <div class="portfolio-title">Building Machine Learning Models with Python</div>
+  <div class="portfolio-meta">PyData Conference (June 2023) | <a href="https://example.com/talk1">Watch Recording</a></div>
+  <div class="portfolio-description">Demonstrated techniques for building effective machine learning models using scikit-learn and TensorFlow</div>
+</div>
+  
+<div class="portfolio-item">
+  <div class="portfolio-title">Data Visualization Best Practices</div>
+  <div class="portfolio-meta">DataViz Summit (October 2022) | <a href="https://example.com/talk2">Slides</a></div>
+  <div class="portfolio-description">Shared strategies for creating insightful and accessible data visualizations</div>
+</div>
+
+</div>
+
+## Projects {#projects-heading}
+
+<div id="projects" class="portfolio-section">
+<!-- 
+To add a project, use the following format:
+<div class="portfolio-item">
+  <div class="portfolio-title">Project Name</div>
+  <div class="portfolio-meta">Year | <a href="URL">GitHub/Demo</a></div>
+  <div class="portfolio-description">Brief description of the project</div>
+  <div class="portfolio-tech">Technologies: Tech1, Tech2, Tech3</div>
+</div>
+-->
+
+<div class="portfolio-item">
+  <div class="portfolio-title">Sales Forecasting System</div>
+  <div class="portfolio-meta">2023 | <a href="https://github.com/fx86/sales-forecast">GitHub</a></div>
+  <div class="portfolio-description">Developed a machine learning system to predict sales for a retail organization</div>
+  <div class="portfolio-tech">Technologies: Python, scikit-learn, Prophet, Flask</div>
+</div>
+  
+<div class="portfolio-item">
+  <div class="portfolio-title">Data Pipeline Framework</div>
+  <div class="portfolio-meta">2022 | <a href="https://github.com/fx86/data-pipeline">GitHub</a></div>
+  <div class="portfolio-description">Created a reusable framework for ETL processes and data analytics</div>
+  <div class="portfolio-tech">Technologies: Python, Apache Airflow, Docker, PostgreSQL</div>
+</div>
+
+</div>
+
+## External Writing {#writing-heading}
+
+<div id="writing" class="portfolio-section">
+<!-- 
+To add an article, use the following format:
+<div class="portfolio-item">
+  <div class="portfolio-title">Article Title</div>
+  <div class="portfolio-meta">Publication/Platform (Date) | <a href="URL">Read</a></div>
+  <div class="portfolio-description">Brief description of the article</div>
+</div>
+-->
+
+<div class="portfolio-item">
+  <div class="portfolio-title">Introduction to Time Series Analysis</div>
+  <div class="portfolio-meta">Towards Data Science (May 2023) | <a href="https://example.com/article1">Read</a></div>
+  <div class="portfolio-description">Comprehensive guide to time series analysis techniques and tools</div>
+</div>
+  
+<div class="portfolio-item">
+  <div class="portfolio-title">The Future of Machine Learning in Finance</div>
+  <div class="portfolio-meta">FinTech Magazine (January 2023) | <a href="https://example.com/article2">Read</a></div>
+  <div class="portfolio-description">Analysis of emerging machine learning applications in the financial sector</div>
+</div>
+
+</div>
+
+<!-- 
+Instructions for use:
+1. To add content, copy and paste the template provided in the comments above each section
+2. To remove a section entirely, simply delete all portfolio-items from that section
+3. Empty sections will be automatically hidden
+-->

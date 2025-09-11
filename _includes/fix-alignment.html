@@ -1,0 +1,79 @@
+<style>
+/* Reset core container padding */
+#quarto-content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 16rem !important;
+  margin-right: 0 !important;
+}
+
+/* Target the posts */
+.quarto-post {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.comments-section {
+  margin-left: 3rem !important;
+  padding-left: 0 !important;
+}
+</style>
+
+<script>
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the exact position of the navbar title for precise alignment
+  function getExactNavbarPosition() {
+    const navbarTitle = document.querySelector('.navbar-title');
+    const brandContainer = document.querySelector('.navbar-brand-container');
+    
+    if (navbarTitle) {
+      const rect = navbarTitle.getBoundingClientRect();
+      const containerRect = brandContainer.getBoundingClientRect();
+      // Get the precise offset between container edge and text
+      const exactOffset = rect.left - containerRect.left + 'px';
+      console.log('Exact navbar title position:', exactOffset);
+      return rect.left;
+    }
+    return null;
+  }
+  
+  // Apply exact alignment based on navbar title position
+  function applyExactAlignment() {
+    const navPos = getExactNavbarPosition();
+    if (!navPos) return;
+    
+    // Apply to all post content
+    const items = document.querySelectorAll('.quarto-listing .list > *');
+    items.forEach(item => {
+      item.style.paddingLeft = '0';
+      item.style.boxSizing = 'border-box';
+      item.style.marginLeft = navPos + 'px';
+    });
+    
+    // Force thumbnails to align
+    const thumbnails = document.querySelectorAll('.quarto-post .thumbnail');
+    thumbnails.forEach(thumb => {
+      thumb.style.marginLeft = '0';
+      thumb.style.paddingLeft = '0';
+    });
+    
+    // Also apply to the listing container
+    const listingContainer = document.querySelector('#listing-listing');
+    if (listingContainer) {
+      listingContainer.style.paddingLeft = '0';
+      listingContainer.style.marginLeft = navPos + 'px';
+    }
+    
+    console.log('Content aligned precisely with navbar title');
+  }
+  
+  // Run after a short delay to ensure all elements are rendered
+  setTimeout(applyExactAlignment, 100);
+  
+  // Also handle window resize
+  window.addEventListener('resize', function() {
+    setTimeout(applyExactAlignment, 100);
+  });
+});
+</script>

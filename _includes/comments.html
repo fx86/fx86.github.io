@@ -1,0 +1,63 @@
+<!-- 
+To enable Giscus comments, follow these steps:
+1. Go to https://giscus.app/
+2. Enter your repository name: fx86/fx86.github.io
+3. Make sure Discussions are enabled in your GitHub repository settings
+4. Choose the Discussion Category to use
+5. Configure the settings as preferred
+6. Copy the generated script and replace this comment block
+
+For now, here's a simple comment section placeholder:
+-->
+<div class="comments-section">
+  <h2>Comments</h2>
+  <p>Comments are powered by GitHub Discussions (Giscus). If your Giscus config meta tags are present in the page head, the comment widget will load automatically. Otherwise this placeholder remains as a helpful note.</p>
+</div>
+<style>
+  .comments-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-top: 1px solid #e9ecef;
+  }
+</style>
+
+<!-- Dynamic Giscus loader: add meta tags in your site HTML head to enable. Example:
+     <meta name="giscus-repo" content="fx86/fx86.github.io">
+     <meta name="giscus-repo-id" content="REPO_ID_HERE">
+     <meta name="giscus-category" content="General">
+     <meta name="giscus-category-id" content="CATEGORY_ID_HERE">
+     <meta name="giscus-mapping" content="pathname"> (optional)
+-->
+<script>
+  (function(){
+    try {
+      const repo = document.querySelector('meta[name="giscus-repo"]')?.getAttribute('content');
+      const repoId = document.querySelector('meta[name="giscus-repo-id"]')?.getAttribute('content');
+      const category = document.querySelector('meta[name="giscus-category"]')?.getAttribute('content');
+      const categoryId = document.querySelector('meta[name="giscus-category-id"]')?.getAttribute('content');
+      const mapping = document.querySelector('meta[name="giscus-mapping"]')?.getAttribute('content') || 'pathname';
+
+      if (repo && (repoId || categoryId || category)) {
+        // remove placeholder text
+        const container = document.querySelector('.comments-section');
+        if (container) container.innerHTML = '<div id="giscus_container"></div>';
+
+        const script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.async = true;
+        script.setAttribute('data-repo', repo);
+        if (repoId) script.setAttribute('data-repo-id', repoId);
+        if (category) script.setAttribute('data-category', category);
+        if (categoryId) script.setAttribute('data-category-id', categoryId);
+        script.setAttribute('data-mapping', mapping);
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-theme', 'light');
+        script.crossOrigin = 'anonymous';
+        document.getElementById('giscus_container').appendChild(script);
+      }
+    } catch (e) {
+      console.warn('Giscus loader failed', e);
+    }
+  })();
+</script>

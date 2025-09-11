@@ -1,0 +1,5 @@
+# Redirects from old Jekyll site to new Quarto site
+/linear_regression_internals /posts/linear-regression-internals/
+/A-checklist-for-debugging-cronjobs /posts/debugging-cronjobs/
+/archive/ /archive.html
+/about.html /about.html

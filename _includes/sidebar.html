@@ -1,0 +1,21 @@
+<!-- Categories block (Quarto will auto-populate if configured) -->
+<div class="sidebar-categories">
+  <h4>Categories</h4>
+  {{#listing.categories}}
+    <div class="category-list">
+      {{#each .}}
+        <div class="category-item">{{.}}</div>
+      {{/each}}
+    </div>
+  {{/listing.categories}}
+</div>
+
+<!-- Email subscription block -->
+<div class="subscribe-box">
+  <h4>Subscribe for updates</h4>
+  <form action="https://buttondown.email/api/emails/embed-subscribe/fibinse" method="post" target="_blank">
+    <input type="email" name="email" placeholder="Your email address" required style="padding:0.5rem; width:70%; border-radius:4px; border:1px solid #ccc;">
+    <button type="submit" style="padding:0.5rem 1.2rem; border-radius:4px; background:#2f3e4a; color:#fff; border:none; margin-left:0.5rem;">Subscribe</button>
+  </form>
+  <small style="color:#6b7280;">Powered by <a href="https://buttondown.email" target="_blank">Buttondown</a>. Unsubscribe anytime.</small>
+</div>
