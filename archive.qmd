@@ -9,7 +9,7 @@ listing:
   filter-ui: true
   date-format: "MMMM D, YYYY"
   fields: [date, title, author, description, reading-time, categories]
-page-layout: full
+page-layout: article
 title-block-banner: false
 ---
 

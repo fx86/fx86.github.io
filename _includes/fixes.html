@@ -1,0 +1,54 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the current URL path
+  const path = window.location.pathname;
+  
+  // Add class based on the path
+  if (path.includes('/about')) {
+    document.body.classList.add('about');
+  } else if (path.includes('/posts/')) {
+    document.body.classList.add('post');
+  } else if (path.includes('/archive')) {
+    document.body.classList.add('archive');
+  } else if (path === '/' || path === '/index.html') {
+    document.body.classList.add('home');
+  }
+
+  // Fix listing items if they exist
+  const listingItems = document.querySelectorAll('.quarto-listing .listing-item');
+  if (listingItems.length > 0) {
+    listingItems.forEach(item => {
+      // Make sure each item has proper layout
+      const thumbnail = item.querySelector('.thumbnail');
+      const listingBody = item.querySelector('.listing-body');
+      
+      if (thumbnail && listingBody) {
+        item.style.display = 'flex';
+        item.style.gap = '1.5rem';
+        thumbnail.style.minWidth = '200px';
+        
+        const img = thumbnail.querySelector('img');
+        if (img) {
+          img.style.margin = '0';
+          img.style.width = '100%';
+          img.style.height = 'auto';
+        }
+      }
+    });
+  }
+
+  // Fix alignment issues with article content
+  const mainContent = document.querySelector('main.content');
+  if (mainContent) {
+    mainContent.style.maxWidth = '800px';
+    mainContent.style.margin = '0 auto';
+    mainContent.style.padding = '0 1.5rem';
+  }
+
+  // Fix sidebar alignment if it exists
+  const sidebar = document.querySelector('.sidebar, #quarto-margin-sidebar');
+  if (sidebar) {
+    sidebar.style.marginTop = '2rem';
+  }
+});
+</script>

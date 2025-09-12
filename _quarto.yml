@@ -12,8 +12,21 @@ website:
   repo-url: https://github.com/fx86/fx86.github.io
   repo-actions: [edit, issue]
   margin-header: subscribe.html
+  page-navigation: true
+  sidebar:
+    - title: "Highlights"
+      contents: _includes/highlight-section.html
+    - id: categories
+      title: "Categories"
+      contents:
+        - text: "Data Science"
+          href: "archive.qmd#category=Data Science"
+        - text: "Machine Learning"
+          href: "archive.qmd#category=Machine Learning"
+        - text: "Programming"
+          href: "archive.qmd#category=Programming"
   navbar:
-    background: primary
+    background: light
     left:
       - text: "Blog"
         href: archive.qmd
@@ -37,7 +50,7 @@ website:
 
 format:
   html:
-    theme: flatly
+    theme: spacelab
     css: styles.css
     toc: true
     code-copy: true
@@ -48,4 +61,3 @@ format:
       - _includes/disqus-meta.html
     include-after-body:
       - _includes/disqus-embed.html
-      - _includes/fix-alignment.html

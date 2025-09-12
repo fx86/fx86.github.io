@@ -1,0 +1,28 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the current URL path
+  const path = window.location.pathname;
+  
+  // Check if this is an about, posts, or archive page
+  if (path.includes('/about') || path.includes('/posts') || path.includes('/archive')) {
+    // Add appropriate class to body element
+    if (path.includes('/about')) {
+      document.body.classList.add('about');
+    }
+    if (path.includes('/posts')) {
+      document.body.classList.add('posts');
+    }
+    if (path.includes('/archive')) {
+      document.body.classList.add('archive');
+    }
+    
+    // Also add data attribute with the path
+    document.body.setAttribute('data-path', path);
+  }
+  
+  // For specifically targeting post listing pages vs individual posts
+  if (path === '/posts/' || path === '/posts' || path === '/archive/' || path === '/archive') {
+    document.body.classList.add('post-listing');
+  }
+});
+</script>
