@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e7774239eaa06057e224b51dbadcb692.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-94c55ac36c6f5f1987265b365b2c94de.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -276,85 +276,6 @@ ga('send', {
 
     } catch (e) { console.warn('Disqus loader failed', e); }
   })();
-</script>
-<style>
-/* Reset core container padding */
-#quarto-content {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin-left: 16rem !important;
-  margin-right: 0 !important;
-}
-
-/* Target the posts */
-.quarto-post {
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-}
-
-.comments-section {
-  margin-left: 3rem !important;
-  padding-left: 0 !important;
-}
-</style>
-
-<script>
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Get the exact position of the navbar title for precise alignment
-  function getExactNavbarPosition() {
-    const navbarTitle = document.querySelector('.navbar-title');
-    const brandContainer = document.querySelector('.navbar-brand-container');
-    
-    if (navbarTitle) {
-      const rect = navbarTitle.getBoundingClientRect();
-      const containerRect = brandContainer.getBoundingClientRect();
-      // Get the precise offset between container edge and text
-      const exactOffset = rect.left - containerRect.left + 'px';
-      console.log('Exact navbar title position:', exactOffset);
-      return rect.left;
-    }
-    return null;
-  }
-  
-  // Apply exact alignment based on navbar title position
-  function applyExactAlignment() {
-    const navPos = getExactNavbarPosition();
-    if (!navPos) return;
-    
-    // Apply to all post content
-    const items = document.querySelectorAll('.quarto-listing .list > *');
-    items.forEach(item => {
-      item.style.paddingLeft = '0';
-      item.style.boxSizing = 'border-box';
-      item.style.marginLeft = navPos + 'px';
-    });
-    
-    // Force thumbnails to align
-    const thumbnails = document.querySelectorAll('.quarto-post .thumbnail');
-    thumbnails.forEach(thumb => {
-      thumb.style.marginLeft = '0';
-      thumb.style.paddingLeft = '0';
-    });
-    
-    // Also apply to the listing container
-    const listingContainer = document.querySelector('#listing-listing');
-    if (listingContainer) {
-      listingContainer.style.paddingLeft = '0';
-      listingContainer.style.marginLeft = navPos + 'px';
-    }
-    
-    console.log('Content aligned precisely with navbar title');
-  }
-  
-  // Run after a short delay to ensure all elements are rendered
-  setTimeout(applyExactAlignment, 100);
-  
-  // Also handle window resize
-  window.addEventListener('resize', function() {
-    setTimeout(applyExactAlignment, 100);
-  });
-});
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
