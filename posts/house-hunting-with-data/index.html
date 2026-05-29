@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>House hunting with data – visualist.in</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-94c55ac36c6f5f1987265b365b2c94de.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-6662ef07283a662755a8967977662d03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,19 +108,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5D708PCPNF"></script>
 
 <script type="text/javascript">
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-XXXXXXXX-X', 'auto');
-
-ga('send', {
-  hitType: 'pageview',
-  'anonymizeIp': true,
-});
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5D708PCPNF', { 'anonymize_ip': true});
 </script>
 <!-- Load fonts similar to Mickaël Canouil's site -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,16 +130,6 @@ ga('send', {
     --bg: #ffffff;
   }
 </style>
-<!-- Google Analytics -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-XXXXXXXX-X');
-</script>
-<!-- End Google Analytics -->
 <meta name="disqus-shortname" content="visualist-1">
 
 
@@ -291,26 +279,26 @@ ga('send', {
 <h2 class="anchored" data-anchor-id="can-you-smell-all-that-data">Can you smell all that data ?!</h2>
 <p>New Year 2017 resolution: When you have data lying around, visualize it!</p>
 <p>And, so we went. I was happy with Pandas and its plotting extensions with a smattering of Seaborn colors schemes and aesthetics for the most part of it.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The following are my default imports</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The following are my default imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.options.display.mpl_style <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.options.display.mpl_style <span class="op">=</span> <span class="va">False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>, color_codes<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># I wanted to be able to read the long addresses so I increased the column width</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_colwidth'</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_colwidth'</span>, <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Now, that I had imported all the packages that I needed to begin with, I did what all of you would do, with the data.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"housing.csv"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"housing.csv"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> df.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>(58551, 227)</code></pre>
 <p>The data set initially was 58 thousand rows long and 227 columns wide. This was because there was a lot of overlap; thanks in-part to the nested JSON structure and save duplicates listings.</p>
 <p>While the script was humming along, I had pretty-printed it and found some columns of interest.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> {<span class="st">"completion_date"</span>:<span class="st">"completed_on"</span>,<span class="st">"ctr"</span>:<span class="st">"CTR"</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> {<span class="st">"completion_date"</span>:<span class="st">"completed_on"</span>,<span class="st">"ctr"</span>:<span class="st">"CTR"</span>,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"date_added"</span>:<span class="st">"date_added"</span>,<span class="st">"date_added_in_seconds"</span>:<span class="st">"listing_date_seconds"</span>,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"developer_name"</span>:<span class="st">"developer_name"</span>,<span class="st">"featured_type"</span>:<span class="st">"featured_type"</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"impressions"</span>:<span class="st">"impressions"</span>,<span class="st">"inventory_amenities_has_gas_pipeline"</span>:<span class="st">"has_gas"</span>,</span>
@@ -344,20 +332,20 @@ ga('send', {
 <span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"title"</span>:<span class="st">"title"</span>,<span class="st">"type"</span>:<span class="st">"sale_type"</span>,</span>
 <span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"updated_at"</span>:<span class="st">"updated_on"</span>,</span>
 <span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"_id"</span>: <span class="st">"id"</span>,</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"display_neighbourhood_0"</span>: <span class="st">"locality"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"display_neighbourhood_0"</span>: <span class="st">"locality"</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Next, I kept the necessary columns and renamed them.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> df[columns.keys()]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> df[columns.keys()]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> temp.rename(columns<span class="op">=</span>columns).drop_duplicates(<span class="st">'id'</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> temp.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> temp.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>(24482, 41)</code></pre>
 <p>We have reduced to 41 columns and 24 thousand properties now.</p>
 <section id="missing-values-in-data" class="level3">
 <h3 class="anchored" data-anchor-id="missing-values-in-data">Missing values in data</h3>
 <p>Parental advisory: if your kid comes home with a data set with a long list of columns, do not let them try the following visualization. It may cause dizziness on empty stomach.</p>
 <p>But, the same viz helps to see the amount of null values that exist in each column.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> pd.DataFrame({col: {<span class="st">'Empty'</span>: temp[temp[col].isnull()].shape[<span class="dv">0</span>], <span class="st">'Total'</span>: temp.shape[<span class="dv">0</span>]} <span class="cf">for</span> col <span class="kw">in</span> temp})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> pd.DataFrame({col: {<span class="st">'Empty'</span>: temp[temp[col].isnull()].shape[<span class="dv">0</span>], <span class="st">'Total'</span>: temp.shape[<span class="dv">0</span>]} <span class="cf">for</span> col <span class="kw">in</span> temp})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>So we made a new data frame, which kept a count of empty cells against non-empty cells. It looked like this:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_temp.T.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_temp.T.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div>
 <table class="dataframe table table-sm table-striped small">
 <thead>
@@ -431,7 +419,7 @@ bedrooms
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_temp.<span class="bu">apply</span>(<span class="kw">lambda</span> v: (v.Total <span class="op">-</span> v.Empty)<span class="op">/</span><span class="bu">float</span>(v.Total) <span class="op">*</span> <span class="dv">100</span>).plot(kind<span class="op">=</span><span class="st">'barh'</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_temp.<span class="bu">apply</span>(<span class="kw">lambda</span> v: (v.Total <span class="op">-</span> v.Empty)<span class="op">/</span><span class="bu">float</span>(v.Total) <span class="op">*</span> <span class="dv">100</span>).plot(kind<span class="op">=</span><span class="st">'barh'</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2938ff60&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -440,18 +428,18 @@ bedrooms
 </figure>
 </div>
 <p>From the above visual we gather that, <em>developer_name</em> column is almost empty. Giving it company are, the <em>sub_locality</em>, <em>housing_region</em> and <em>locality</em> columns.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># temp = temp[filter(lambda v: v not in ['sub_locality', 'housing_region', 'locality'], temp.columns)]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's drop "status" from the data because it has only one value</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># temp = temp[filter(lambda v: v not in ['sub_locality', 'housing_region', 'locality'], temp.columns)]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's drop "status" from the data because it has only one value</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> temp.status.unique()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"dropping status column from temp"</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> temp.drop(<span class="st">'status'</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> temp.drop(<span class="st">'status'</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>[u'ACTIVE']
 dropping status column from temp</code></pre>
 </section>
 <section id="what-does-the-distribution-of-listings-across-states-look-like" class="level3">
 <h3 class="anchored" data-anchor-id="what-does-the-distribution-of-listings-across-states-look-like">What does the distribution of listings across states look like ?</h3>
 <p>Maharashtra leads followed by Karnataka and Tamil Nadu.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(y<span class="op">=</span><span class="st">"state"</span>, data<span class="op">=</span>temp, palette<span class="op">=</span><span class="st">"Blues_d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(y<span class="op">=</span><span class="st">"state"</span>, data<span class="op">=</span>temp, palette<span class="op">=</span><span class="st">"Blues_d"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x29111550&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -464,8 +452,8 @@ dropping status column from temp</code></pre>
 <h3 class="anchored" data-anchor-id="and-how-about-the-price-distribution">And how about the price distribution ?</h3>
 <p>Well, in our dataset, Maharashtra seems to be a really pricey state to buy properties in.</p>
 <p>A sizeable chunk of the listings in the state lies between 5-10 crores per piece. No other state seems to come close to Maharashtra’s behaviour.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sns.stripplot(temp[<span class="st">"price"</span>], temp[<span class="st">'state'</span>], order<span class="op">=</span>temp.state.dropna().unique())</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Listing prices across states"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sns.stripplot(temp[<span class="st">"price"</span>], temp[<span class="st">'state'</span>], order<span class="op">=</span>temp.state.dropna().unique())</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Listing prices across states"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;matplotlib.text.Text at 0x2ea3c128&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -477,7 +465,7 @@ dropping status column from temp</code></pre>
 <section id="what-about-the-metro-cities-then" class="level3">
 <h3 class="anchored" data-anchor-id="what-about-the-metro-cities-then">What about the metro cities, then ?</h3>
 <p>A metropolitan area according to the Wikipedia definition is - “The Constitution (seventy-fourth Amendment) Act, 1992 defines a metropolitan area in India as, an area having a population of ten lakhs or more, comprised in one or more districts and consisting of two or more Municipalities or Panchayats or other contiguous areas, specified by the Governor by public notification to be a Metropolitan area.” <a href="https://en.wikipedia.org/wiki/List_of_metropolitan_areas_in_India">Source</a></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>metros <span class="op">=</span> [<span class="st">'New Delhi'</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>metros <span class="op">=</span> [<span class="st">'New Delhi'</span>,</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">'Mumbai'</span>, </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="st">'Kolkata'</span>,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">'Bangalore'</span>, </span>
@@ -490,7 +478,7 @@ dropping status column from temp</code></pre>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>metro_data <span class="op">=</span> temp[temp.city.isin(metros)]</span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>sns.stripplot(metro_data[<span class="st">"price"</span>], metro_data[<span class="st">'city'</span>], order<span class="op">=</span>metro_data.city.dropna().unique())</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Listing prices across metro cities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Listing prices across metro cities"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;matplotlib.text.Text at 0x2e2cfe80&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -500,8 +488,8 @@ dropping status column from temp</code></pre>
 </div>
 <p>Apparently, Mumbai lags behind New Delhi in prices. Though it would be interesting to track down for Maharashtra’s price lead as a state, but we will take a raincheck on it. Remember, we are house hunting in Delhi because yours-truly resides there.</p>
 <p>housing.com also provides a column called <em>appt_type_id</em>. This may provide insight to the <em>appt_type_id</em> we should be looking at.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sns.stripplot(temp[<span class="st">'appt_type_id'</span>], temp[<span class="st">"price"</span>],  order<span class="op">=</span>temp[<span class="st">'appt_type_id'</span>].dropna().unique())</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"price variation across appartment type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sns.stripplot(temp[<span class="st">'appt_type_id'</span>], temp[<span class="st">"price"</span>],  order<span class="op">=</span>temp[<span class="st">'appt_type_id'</span>].dropna().unique())</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"price variation across appartment type"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;matplotlib.text.Text at 0x177e3278&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -514,9 +502,9 @@ dropping status column from temp</code></pre>
 <section id="correlations" class="level3">
 <h3 class="anchored" data-anchor-id="correlations">Correlations</h3>
 <p>Some obvious learnings : - More bedrooms usually means more toilets. - Price has an inclination to rise linearly with area. - Area in sq ft though does not rise linearly beyond a certain limit.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'bedrooms'</span>, <span class="st">'area'</span>, <span class="st">'price'</span>, <span class="st">'toilets'</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'bedrooms'</span>, <span class="st">'area'</span>, <span class="st">'price'</span>, <span class="st">'toilets'</span>]</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> temp[features].stack().unstack()</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df_temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df_temp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;seaborn.axisgrid.PairGrid at 0x32e352e8&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -525,9 +513,9 @@ dropping status column from temp</code></pre>
 </figure>
 </div>
 <p>To bring out the correlations more sharply, let’s create a heatmap</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'bedrooms'</span>, <span class="st">'area'</span>, <span class="st">'price'</span>, <span class="st">'toilets'</span>]</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap((temp[features].corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap((temp[features].corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2fc52d68&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -536,10 +524,10 @@ dropping status column from temp</code></pre>
 </figure>
 </div>
 <p>Alright, so which of the ammenities affect the housing prices much ?</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> temp[[<span class="st">'has_pool'</span>, <span class="st">'has_gated_community'</span>, <span class="st">'has_gas'</span>, <span class="st">u'has_gym'</span>, <span class="st">u'has_lift'</span>, <span class="st">'has_parking'</span>, <span class="st">'has_loan'</span>]].astype(<span class="bu">int</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> temp[[<span class="st">'has_pool'</span>, <span class="st">'has_gated_community'</span>, <span class="st">'has_gas'</span>, <span class="st">u'has_gym'</span>, <span class="st">u'has_lift'</span>, <span class="st">'has_parking'</span>, <span class="st">'has_loan'</span>]].astype(<span class="bu">int</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_temp[<span class="st">'price'</span>] <span class="op">=</span> temp[<span class="st">'price'</span>]</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap((df_temp.corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap((df_temp.corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x3047fc50&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -548,12 +536,12 @@ dropping status column from temp</code></pre>
 </figure>
 </div>
 <p>Wow, it seems price has the most correlation with the availability of gas. I always assumed, having a pool makes things pricier. Let’s see if this holds true for a land-locked city like New Delhi.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> temp[temp.city.isin([<span class="st">'New Delhi'</span>])].fillna(<span class="dv">0</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> temp[temp.city.isin([<span class="st">'New Delhi'</span>])].fillna(<span class="dv">0</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ammenities <span class="op">=</span> [<span class="st">'has_pool'</span>, <span class="st">'has_gated_community'</span>, <span class="st">'has_gas'</span>, <span class="st">u'has_gym'</span>, <span class="st">u'has_lift'</span>, <span class="st">'has_parking'</span>, <span class="st">'has_loan'</span>, <span class="st">'price'</span>]</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df_temp <span class="op">=</span> df_temp[ammenities].astype(<span class="bu">int</span>)</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap((df_temp.corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>,  fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap((df_temp.corr() <span class="op">*</span> <span class="dv">100</span>).applymap(<span class="bu">int</span>), annot<span class="op">=</span><span class="va">True</span>,  fmt<span class="op">=</span><span class="st">"d"</span>, ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">.4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2fca82b0&gt;</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -690,13 +678,14 @@ dropping status column from temp</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1042,7 +1031,7 @@ dropping status column from temp</code></pre>
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2025 Fx86. All rights reserved.</p>
+<p>© 2026 Fx86. All rights reserved.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
