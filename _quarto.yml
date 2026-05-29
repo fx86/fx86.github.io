@@ -42,11 +42,11 @@ website:
       - icon: rss
         href: index.xml
   page-footer: 
-    left: "© 2025 Fx86. All rights reserved."
+    left: "© 2026 Fx86. All rights reserved."
     right:
       - icon: github
         href: https://github.com/fx86
-  google-analytics: "UA-XXXXXXXX-X"
+  google-analytics: "G-5D708PCPNF"
 
 format:
   html:
@@ -57,7 +57,6 @@ format:
     highlight-style: github
     include-in-header:
       - _includes/fonts.html
-      - _includes/google-analytics.html
       - _includes/disqus-meta.html
     include-after-body:
       - _includes/disqus-embed.html
