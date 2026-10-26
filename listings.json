@@ -1,7 +1,8 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/archive.html",
     "items": [
+      "/posts/opentev-plays-dino/index.html",
       "/posts/a-checklist-for-debugging-cronjobs/index.html",
       "/posts/house-hunting-with-data/index.html",
       "/posts/sentiment-analysis-with-textblob/index.html",
@@ -9,8 +10,9 @@
     ]
   },
   {
-    "listing": "/archive.html",
+    "listing": "/index.html",
     "items": [
+      "/posts/opentev-plays-dino/index.html",
       "/posts/a-checklist-for-debugging-cronjobs/index.html",
       "/posts/house-hunting-with-data/index.html",
       "/posts/sentiment-analysis-with-textblob/index.html",
